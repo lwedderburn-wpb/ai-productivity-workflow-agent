@@ -163,33 +163,6 @@
         .priority-medium { color: #ffc107; }
         .priority-low { color: #28a745; }
 
-        .imported-tickets {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            margin-top: 10px;
-        }
-
-        .ticket-summary {
-            background-color: #f8f9fa;
-            border-left: 4px solid #007bff;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 3px;
-        }
-
-        .ticket-summary h5 {
-            margin: 0 0 5px 0;
-            color: #007bff;
-        }
-
-        .ticket-summary p {
-            margin: 3px 0;
-            font-size: 0.9em;
-        }
-
         .response-text {
             background: #f8f9fa;
             padding: 15px;
@@ -277,20 +250,6 @@
                 <div id="single-result"></div>
             </div>
 
-            <!-- XML Import -->
-            <div class="card">
-                <h3>📁 Import from XML</h3>
-                <p>Upload an XML file containing ticket information</p>
-                <form id="xml-import-form" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="xml-file">XML File</label>
-                        <input type="file" id="xml-file" name="xml-file" accept=".xml" required>
-                    </div>
-                    <button type="submit" class="btn">Import XML Tickets</button>
-                </form>
-                <div id="xml-import-result"></div>
-            </div>
-
             <!-- Bulk Analysis -->
             <div class="card">
                 <h3>📋 Bulk Ticket Analysis</h3>
@@ -350,67 +309,6 @@
                     console.error('Error loading stats:', error);
                 });
         }
-
-        // XML import functionality
-        document.getElementById('xml-import-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const fileInput = document.getElementById('xml-file');
-            const file = fileInput.files[0];
-            
-            if (!file) {
-                alert('Please select an XML file');
-                return;
-            }
-            
-            const formData = new FormData();
-            formData.append('xml_file', file);
-            
-            const resultDiv = document.getElementById('xml-import-result');
-            resultDiv.innerHTML = '<div class="loading">Importing XML tickets...</div>';
-            
-            fetch('/api/import_xml', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    let resultsHtml = `<div class="result">
-                        <h4>XML Import Results</h4>
-                        <p><strong>Successfully imported ${data.total_imported} tickets</strong></p>
-                        <div class="imported-tickets">`;
-                    
-                    data.results.forEach(result => {
-                        const analysis = result.analysis;
-                        const ticket = result.ticket_data;
-                        resultsHtml += `
-                            <div class="ticket-summary">
-                                <h5>Ticket: ${ticket.id}</h5>
-                                <p><strong>Subject:</strong> ${ticket.subject || 'N/A'}</p>
-                                <p><strong>Category:</strong> ${analysis.category}</p>
-                                <p><strong>Priority:</strong> <span class="priority-${analysis.priority}">${analysis.priority.toUpperCase()}</span></p>
-                                <p><strong>Confidence:</strong> ${(analysis.confidence * 100).toFixed(1)}%</p>
-                            </div>
-                        `;
-                    });
-                    
-                    resultsHtml += '</div></div>';
-                    resultDiv.innerHTML = resultsHtml;
-                    
-                    // Clear the file input
-                    fileInput.value = '';
-                    
-                    // Refresh stats
-                    loadStats();
-                } else {
-                    resultDiv.innerHTML = `<div class="error">Error: ${data.error}</div>`;
-                }
-            })
-            .catch(error => {
-                resultDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
-            });
-        });
 
         // Single ticket analysis
         document.getElementById('single-ticket-form').addEventListener('submit', function(e) {
