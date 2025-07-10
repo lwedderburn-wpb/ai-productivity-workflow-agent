@@ -53,30 +53,81 @@ class XMLTicketParser:
         """Extract ticket data from XML element"""
         ticket = {}
         
-        # Common field mappings
-        field_mappings = {
-            'id': ['id', 'ticket_id', 'ticketId', 'number'],
-            'subject': ['subject', 'title', 'summary'],
-            'description': ['description', 'details', 'body', 'content'],
-            'priority': ['priority', 'urgency', 'severity'],
-            'category': ['category', 'type', 'classification'],
-            'requester': ['requester', 'user', 'customer', 'reporter'],
-            'status': ['status', 'state'],
-            'created_date': ['created', 'date_created', 'timestamp', 'submitted'],
-            'assigned_to': ['assigned_to', 'assignee', 'owner']
-        }
+        # Extract basic fields
+        id_elem = ticket_elem.find('id')
+        if id_elem is not None and id_elem.text:
+            ticket['id'] = id_elem.text.strip()
         
-        # Extract data using multiple possible field names
-        for field, possible_names in field_mappings.items():
-            for name in possible_names:
-                elem = ticket_elem.find(name)
-                if elem is not None and elem.text:
-                    ticket[field] = elem.text.strip()
-                    break
-                # Try as attribute
-                if ticket_elem.get(name):
-                    ticket[field] = ticket_elem.get(name).strip()
-                    break
+        number_elem = ticket_elem.find('number')
+        if number_elem is not None and number_elem.text:
+            ticket['number'] = number_elem.text.strip()
+        
+        name_elem = ticket_elem.find('name')
+        if name_elem is not None and name_elem.text:
+            ticket['subject'] = name_elem.text.strip()
+        
+        description_elem = ticket_elem.find('description_no_html')
+        if description_elem is not None and description_elem.text:
+            ticket['description'] = description_elem.text.strip()
+        else:
+            description_elem = ticket_elem.find('description')
+            if description_elem is not None and description_elem.text:
+                ticket['description'] = description_elem.text.strip()
+        
+        state_elem = ticket_elem.find('state')
+        if state_elem is not None and state_elem.text:
+            ticket['status'] = state_elem.text.strip()
+        
+        priority_elem = ticket_elem.find('priority')
+        if priority_elem is not None and priority_elem.text:
+            ticket['priority'] = priority_elem.text.strip()
+        
+        # Extract requester information
+        requester_elem = ticket_elem.find('requester')
+        if requester_elem is not None:
+            name_elem = requester_elem.find('name')
+            email_elem = requester_elem.find('email')
+            if name_elem is not None and name_elem.text:
+                ticket['requester'] = name_elem.text.strip()
+                if email_elem is not None and email_elem.text:
+                    ticket['requester'] += f" ({email_elem.text.strip()})"
+            elif email_elem is not None and email_elem.text:
+                ticket['requester'] = email_elem.text.strip()
+        
+        # Extract assignee information
+        assignee_elem = ticket_elem.find('assignee')
+        if assignee_elem is not None:
+            name_elem = assignee_elem.find('name')
+            if name_elem is not None and name_elem.text:
+                ticket['assigned_to'] = name_elem.text.strip()
+        
+        # Extract category information
+        category_elem = ticket_elem.find('category')
+        if category_elem is not None:
+            name_elem = category_elem.find('name')
+            if name_elem is not None and name_elem.text:
+                ticket['category'] = name_elem.text.strip()
+        
+        # Extract dates
+        created_elem = ticket_elem.find('created_at')
+        if created_elem is not None and created_elem.text:
+            ticket['created_date'] = created_elem.text.strip()
+        
+        # Extract custom fields for additional information
+        custom_fields = ticket_elem.find('custom_fields_values')
+        if custom_fields is not None:
+            additional_info = []
+            for field in custom_fields.findall('custom_fields_value'):
+                name_elem = field.find('name')
+                value_elem = field.find('value')
+                if name_elem is not None and value_elem is not None and value_elem.text:
+                    additional_info.append(f"{name_elem.text}: {value_elem.text.strip()}")
+            
+            if additional_info:
+                if ticket.get('description'):
+                    ticket['description'] += "\n\nAdditional Information:\n" + "\n".join(additional_info)
+                else:
+                    ticket['description'] = "Additional Information:\n" + "\n".join(additional_info)
         
         # Ensure required fields
         if not ticket.get('id'):
