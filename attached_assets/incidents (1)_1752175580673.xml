@@ -1,0 +1,1147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents>
+  <incident>
+    <id>159143076</id>
+    <number>31149</number>
+    <name>GIS Data - Geocode location addresses</name>
+    <description> GIS requests (GIS Data add/change, Addressing, Maps, Web App, etc) </description>
+    <description_no_html>GIS requests (GIS Data add/change, Addressing, Maps, Web App, etc)</description_no_html>
+    <state>In progress</state>
+    <priority>Medium</priority>
+    <category>
+      <id>2218350</id>
+      <name>SR_GIS</name>
+      <default_tags>Service Request</default_tags>
+      <parent_id nil="true"/>
+      <deleted>false</deleted>
+      <default_assignee_id>-1</default_assignee_id>
+    </category>
+    <subcategory>
+      <id>2497053</id>
+      <name>'SR_' Add / Change GIS Data</name>
+      <default_tags></default_tags>
+      <parent_id>2218350</parent_id>
+      <deleted>false</deleted>
+      <default_assignee_id>-1</default_assignee_id>
+    </subcategory>
+    <assignee>
+      <group_id>12669266</group_id>
+      <is_user>true</is_user>
+      <id>11344229</id>
+      <name>Leighton Wedderburn</name>
+      <email>lwedderburn@wpb.org</email>
+      <avatar>
+        <type>initials</type>
+        <initials>LW</initials>
+        <color>var(--colors-foreground-7-600)</color>
+      </avatar>
+      <reports_to>
+        <group_id>10178933</group_id>
+        <is_user>true</is_user>
+        <id>9402438</id>
+        <name>James Judge</name>
+        <email>JJudge@wpb.org</email>
+        <avatar>
+          <type>initials</type>
+          <initials>JJ</initials>
+          <color>var(--colors-foreground-7-700)</color>
+        </avatar>
+      </reports_to>
+    </assignee>
+    <requester>
+      <id>10321990</id>
+      <account_id>87667</account_id>
+      <user_id>9422148</user_id>
+      <email>EChristian@wpb.org</email>
+      <name>Taylor Christian</name>
+      <disabled>false</disabled>
+      <has_gravatar>false</has_gravatar>
+      <customer_satisfaction_survey_time>2025-06-18T12:53:29-04:00</customer_satisfaction_survey_time>
+      <avatar>
+        <type>initials</type>
+        <initials>TC</initials>
+        <color>var(--colors-foreground-7-500)</color>
+      </avatar>
+    </requester>
+    <created_at>2025-06-25T10:23:44-04:00</created_at>
+    <updated_at>2025-06-27T10:16:11-04:00</updated_at>
+    <due_at>2025-07-08T00:00:00-04:00</due_at>
+    <sla_violations/>
+    <number_of_comments>0</number_of_comments>
+    <user_saw_all_comments>true</user_saw_all_comments>
+    <is_service_request>true</is_service_request>
+    <created_by>
+      <id>10321990</id>
+      <account_id>87667</account_id>
+      <user_id>9422148</user_id>
+      <email>EChristian@wpb.org</email>
+      <name>Taylor Christian</name>
+      <disabled>false</disabled>
+      <has_gravatar>false</has_gravatar>
+      <customer_satisfaction_survey_time>2025-06-18T12:53:29-04:00</customer_satisfaction_survey_time>
+      <avatar>
+        <type>initials</type>
+        <initials>TC</initials>
+        <color>var(--colors-foreground-7-500)</color>
+      </avatar>
+    </created_by>
+    <resolved_by nil="true"/>
+    <resolution_description nil="true"/>
+    <resolution_code nil="true"/>
+    <group_assignee>
+      <id>8738388</id>
+      <name>GIS</name>
+      <description></description>
+      <disabled>false</disabled>
+      <is_user>false</is_user>
+      <reports_to>
+        <id>-1</id>
+        <avatar nil="true"/>
+        <name nil="true"/>
+        <href>https://cityofwestpalmbeach.samanage.com/groups/-1.xml</href>
+      </reports_to>
+      <avatar>
+        <type>group</type>
+        <color>var(--colors-foreground-7-500)</color>
+        <klass>RealGroup</klass>
+      </avatar>
+      <type>RealGroup</type>
+      <send_notifications>true</send_notifications>
+      <custom_fields_values/>
+      <memberships>
+        <membership>
+          <id>11213210</id>
+          <type>User</type>
+          <user>Diana Alvarez</user>
+        </membership>
+      </memberships>
+    </group_assignee>
+    <customer_satisfaction_survey_sent_at nil="true"/>
+    <customer_satisfaction_survey_completed_at nil="true"/>
+    <custom>2025-06-25 14:23:47.937468</custom>
+    <href>https://cityofwestpalmbeach.samanage.com/incidents/159143076-gis-data-geocode-location-addresses.xml</href>
+    <href_account_domain>https://cityofwestpalmbeach.samanage.com/incidents/159143076-gis-data-geocode-location-addresses</href_account_domain>
+    <site>
+      <id>205261</id>
+      <name>CityHall</name>
+      <location>CityHall</location>
+      <description></description>
+      <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+      <language>-1</language>
+      <business_record nil="true"/>
+    </site>
+    <department>
+      <id>325528</id>
+      <name>Public Utilities Department</name>
+      <description></description>
+      <default_assignee_id nil="true"/>
+    </department>
+    <cc>
+      <cc>Alyssa Outlaw &lt;AOutlaw@wpb.org&gt;</cc>
+      <cc>James Judge &lt;JJudge@wpb.org&gt;</cc>
+    </cc>
+    <custom_fields_values>
+      <custom_fields_value>
+        <id>351578278</id>
+        <custom_field_id>3004989</custom_field_id>
+        <name>Additional Information</name>
+        <value>Hello! We have tried to create a GIS map for the High-Efficiency Toilet Program and had previously encountered some obstacles with address formatting. This program has been ongoing since 2012 and includes a lot of data (addresses) for where the toilets are/should be installed. I have included a copy of the file here for reference. Can you please let me know how to move forward with this? We keep putting it off, but having the map available will be beneficial for the program moving forward. The map should be internal-facing only. Thank you!</value>
+        <attachment nil="true"/>
+        <options></options>
+        <type>6</type>
+        <type_name>Text_Area</type_name>
+        <entity nil="true"/>
+        <user nil="true"/>
+      </custom_fields_value>
+      <custom_fields_value>
+        <id>351578279</id>
+        <custom_field_id>3732139</custom_field_id>
+        <name>Request Type (GIS)</name>
+        <value>Map Request</value>
+        <attachment nil="true"/>
+        <options>Add/Change GIS  Data Addressing Request Anaylasis &amp; Report Creation Information &amp; Data Request Map Request User Account Access Web Application Other</options>
+        <type>2</type>
+        <type_name>Dropdown</type_name>
+        <entity nil="true"/>
+        <user nil="true"/>
+      </custom_fields_value>
+    </custom_fields_values>
+    <origin>external</origin>
+    <price nil="true"/>
+    <comments/>
+    <attachments>
+      <attachment>
+        <id>248845842</id>
+        <content_type>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</content_type>
+        <size>1601562</size>
+        <filename>Updated v2 2012-2022 REDEEMED VOUCHERS - DO NOT CHANGE.xlsx</filename>
+        <url>https://s3.us-east-1.amazonaws.com/production.main.customer.data/attachments/543e8ffcc70efe719b53/Updated%20v2%202012-2022%20REDEEMED%20VOUCHERS%20-%20DO%20NOT%20CHANGE.xlsx?versionId=GPA4FW9HVH1jf04eJitw6W9vuwqKikph&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAREFPCQSX36KL3J6M%2F20250710%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20250710T192331Z&amp;X-Amz-Expires=600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=ab4a447d95ac583b5de31ace892b445f605a7db91d0d17a63a2d44283c9ee96b</url>
+        <shared_attachment>false</shared_attachment>
+        <attachable_id>159143076</attachable_id>
+        <attachable_type>Incident</attachable_type>
+        <attachment_type>attachment</attachment_type>
+        <thumb_url>/attachments/543e8ffcc70efe719b53/updated-v2-2012-2022-redeemed-vouchers-do-not-change-xlsx.vnd?thumb=true</thumb_url>
+        <secure_url>/attachments/543e8ffcc70efe719b53/updated-v2-2012-2022-redeemed-vouchers-do-not-change-xlsx.vnd</secure_url>
+        <link_uuid_url>/attachments/543e8ffcc70efe719b53</link_uuid_url>
+        <uuid>543e8ffcc70efe719b53</uuid>
+      </attachment>
+    </attachments>
+    <statistics>
+      <statistic>
+        <statistic_type>last_state_change</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-06-27T10:16:11-04:00","history":[{"id":1095264,"title":"","startTime":"2025-06-25T10:23:44.000-04:00","endTime":"2025-06-25T14:41:52.623+00:00","timeSpent":1089,"timeSpentBH":1089,"timeSinceCreation":0,"timeSinceCreationBH":0,"isCurrent":false,"isDeleted":false},{"id":1095266,"title":"","startTime":"2025-06-25T10:41:52.000-04:00","endTime":"2025-06-27T14:16:11.610+00:00","timeSpent":171260,"timeSpentBH":70460,"timeSinceCreation":1088,"timeSinceCreationBH":1088,"isCurrent":false,"isDeleted":false}],"summary":{"1095264":1088.697985423,"1095266":171259.690445216},"bh_summary":{"1095264":1089,"1095266":70460}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>State Changed</statistic_type>
+        <time>00:00</time>
+        <time_elapsed>00:00</time_elapsed>
+        <business_time_elapsed>00:00</business_time_elapsed>
+        <value>2025-06-25 14:23:44 UTC</value>
+      </statistic>
+      <statistic>
+        <statistic_type>reassignments</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>3</value>
+      </statistic>
+      <statistic>
+        <statistic_type>last_reassigned</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-06-25T12:10:34-04:00","history":[{"id":8738352,"title":"City Hall Help Desk","startTime":"2025-06-25T14:23:48.000+00:00","endTime":"2025-06-25T14:41:52.541+00:00","timeSpent":1085,"timeSpentBH":1085,"timeSinceCreation":4,"timeSinceCreationBH":4,"isCurrent":false,"isDeleted":false},{"id":10178933,"title":"James Judge","startTime":"2025-06-25T10:41:52.000-04:00","endTime":"2025-06-25T16:10:34.172+00:00","timeSpent":5322,"timeSpentBH":5322,"timeSinceCreation":1088,"timeSinceCreationBH":1088,"isCurrent":false,"isDeleted":false}],"summary":{"8738352":1084.619968587,"10178933":5322.780640637},"bh_summary":{"8738352":1085,"10178933":5322}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>assignee_opened_show</statistic_type>
+        <time>00:18</time>
+        <time_elapsed>00:18</time_elapsed>
+        <business_time_elapsed>00:18</business_time_elapsed>
+        <value>8738352</value>
+      </statistic>
+      <statistic>
+        <statistic_type>to_assignment</statistic_type>
+        <time>00:19</time>
+        <time_elapsed>00:19</time_elapsed>
+        <business_time_elapsed>00:19</business_time_elapsed>
+        <value>2025-06-25 14:41:52 UTC</value>
+      </statistic>
+      <statistic>
+        <statistic_type>assignee_opened_show</statistic_type>
+        <time>01:30</time>
+        <time_elapsed>01:30</time_elapsed>
+        <business_time_elapsed>01:30</business_time_elapsed>
+        <value>10178933</value>
+      </statistic>
+      <statistic>
+        <statistic_type>last_group_reassigned</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-06-25T12:01:22-04:00","history":[],"summary":{}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>assignee_opened_show</statistic_type>
+        <time>01:48</time>
+        <time_elapsed>01:48</time_elapsed>
+        <business_time_elapsed>01:48</business_time_elapsed>
+        <value>12669266</value>
+      </statistic>
+    </statistics>
+    <tags>
+      <tag>
+        <name>Service Request</name>
+      </tag>
+      <tag>
+        <name>CityHall</name>
+      </tag>
+      <tag>
+        <name>Public Utilities Department</name>
+      </tag>
+    </tags>
+    <incidents/>
+    <changes/>
+    <solutions/>
+    <associated_sla_names/>
+    <is_customer_satisfied nil="true"/>
+    <customer_satisfaction_response nil="true"/>
+    <total_time_spent>0</total_time_spent>
+    <resolution nil="true"/>
+    <resolution_type nil="true"/>
+    <tasks/>
+    <time_tracks/>
+    <assets/>
+    <mobiles/>
+    <other_assets/>
+    <configuration_items/>
+    <discovery_hardwares/>
+    <purchase_orders/>
+    <releases/>
+    <problems/>
+    <request_variables>
+      <request_variable>
+        <id>351578278</id>
+        <custom_field_id>3004989</custom_field_id>
+        <name>Additional Information</name>
+        <value>Hello! We have tried to create a GIS map for the High-Efficiency Toilet Program and had previously encountered some obstacles with address formatting. This program has been ongoing since 2012 and includes a lot of data (addresses) for where the toilets are/should be installed. I have included a copy of the file here for reference. Can you please let me know how to move forward with this? We keep putting it off, but having the map available will be beneficial for the program moving forward. The map should be internal-facing only. Thank you!</value>
+        <attachment nil="true"/>
+        <options></options>
+        <type>6</type>
+        <type_name>Text_Area</type_name>
+        <entity nil="true"/>
+        <user nil="true"/>
+      </request_variable>
+      <request_variable>
+        <id>351578279</id>
+        <custom_field_id>3732139</custom_field_id>
+        <name>Request Type (GIS)</name>
+        <value>Map Request</value>
+        <attachment nil="true"/>
+        <options>Add/Change GIS  Data Addressing Request Anaylasis &amp; Report Creation Information &amp; Data Request Map Request User Account Access Web Application Other</options>
+        <type>2</type>
+        <type_name>Dropdown</type_name>
+        <entity nil="true"/>
+        <user nil="true"/>
+      </request_variable>
+    </request_variables>
+    <cc_groups>
+      <cc_group>
+        <id>11928575</id>
+        <name>Alyssa Outlaw</name>
+        <email>AOutlaw@wpb.org</email>
+        <disabled>false</disabled>
+        <is_user>true</is_user>
+        <user_id>10663999</user_id>
+        <reports_to>
+          <id>10201101</id>
+          <avatar>
+            <type>initials</type>
+            <initials>TC</initials>
+            <color>var(--colors-foreground-7-500)</color>
+            <klass>UserGroup</klass>
+          </avatar>
+          <name>Taylor Christian</name>
+          <href>https://cityofwestpalmbeach.samanage.com/groups/10201101.xml</href>
+        </reports_to>
+        <avatar>
+          <type>initials</type>
+          <initials>AO</initials>
+          <color>var(--colors-foreground-7-800)</color>
+          <klass>UserGroup</klass>
+        </avatar>
+        <type>UserGroup</type>
+        <send_notifications>true</send_notifications>
+        <custom_fields_values/>
+      </cc_group>
+      <cc_group>
+        <id>10178933</id>
+        <name>James Judge</name>
+        <email>JJudge@wpb.org</email>
+        <disabled>false</disabled>
+        <is_user>true</is_user>
+        <user_id>9402438</user_id>
+        <reports_to>
+          <id>9552923</id>
+          <avatar>
+            <type>initials</type>
+            <initials>MT</initials>
+            <color>var(--colors-foreground-7-700)</color>
+            <klass>UserGroup</klass>
+          </avatar>
+          <name>Miguel Gamino Telles</name>
+          <href>https://cityofwestpalmbeach.samanage.com/groups/9552923.xml</href>
+        </reports_to>
+        <avatar>
+          <type>initials</type>
+          <initials>JJ</initials>
+          <color>var(--colors-foreground-7-700)</color>
+          <klass>UserGroup</klass>
+        </avatar>
+        <type>UserGroup</type>
+        <send_notifications>true</send_notifications>
+        <custom_fields_values/>
+      </cc_group>
+    </cc_groups>
+    <completed>true</completed>
+    <no_process>true</no_process>
+  </incident>
+  <incident>
+    <id>159552407</id>
+    <number>31439</number>
+    <name>GIS Application - Update the 2018 and 2024 Pavement Condition Comparision</name>
+    <description> Leighton, 
+ You started by creating this application in March. Since then, Alex has made internal and public-facing dashboards for the 2024 PCI. I want you to continue building out this application. 
+ &lt;a href="https://wpbgisportal.wpb.org/portal/home/item.html?id=8f6a97a50b4f4e5b98885ed8f5c188a1"&gt;https://wpbgisportal.wpb.org/portal/home/item.html?id=8f6a97a50b4f4e5b98885ed8f5c188a1&lt;/a&gt; 
+ Add the 2024 map service (verify this URL with Alex) to the 2024 map. 
+ &lt;a href="https://wpbgis.maps.arcgis.com/home/item.html?id=eb9024357a884f2d880cd0c68d51487b"&gt;West Palm Beach Road Conditions - Webmap is for Public Facing Dashboard - Overview&lt;/a&gt; 
+ &lt;a href="https://wpbgisportal.wpb.org/portal/home/item.html?id=8f6a97a50b4f4e5b98885ed8f5c188a1"&gt;https://wpbgisportal.wpb.org/portal/home/item.html?id=8f6a97a50b4f4e5b98885ed8f5c188a1&lt;/a&gt; 
+ The segments were symbolized from the category field. I want you to symbolize the 2018 map the same way, Back in March when we first showed it Engineering pointed out that the 2018 map category values were incorrect (they did not align with the PCI values) so the category values will need to be recalculated in a copy of the geodatabase layer. 
+ Create a new ArcPro project make a copy of the 2018 geodatabase layer in the default project database and update the category field using the values provided below. 
+ &lt;img src="/attachments/4faa958f4567e8112ded/blobid0.png"&gt; 
+   
+   </description>
+    <description_no_html>Leighton, You started by creating this application in March. Since then, Alex has made internal and public-facing dashboards for the 2024 PCI. I want you to continue building out this application. https://wpbgisportal.wpb.org/portal/home/item.html?id=8f6a97a50b4f4e5b98885ed8f5c188a1 Add the 2024 map service (verify this URL with Alex) to the 2024 map. West Palm Beach Road Conditions - Webmap is for Public Facing Dashboard - Overview https://wpbgisportal.wpb.org/portal/home/item.html?id=8f6a97a50b4f4e5b98885ed8f5c188a1 The segments were symbolized from the category field. I want you to symbolize the 2018 map the same way, Back in March when we first showed it Engineering pointed out that the 2018 map category values were incorrect (they did not align with the PCI values) so the category values will need to be recalculated in a copy of the geodatabase layer. Create a new ArcPro project make a copy of the 2018 geodatabase layer in the default project database and update the category field using the values provided below.</description_no_html>
+    <state>Pending approval</state>
+    <priority>Medium</priority>
+    <category>
+      <id>2218350</id>
+      <name>SR_GIS</name>
+      <default_tags>Service Request</default_tags>
+      <parent_id nil="true"/>
+      <deleted>false</deleted>
+      <default_assignee_id>-1</default_assignee_id>
+    </category>
+    <subcategory>
+      <id>2497053</id>
+      <name>'SR_' Add / Change GIS Data</name>
+      <default_tags></default_tags>
+      <parent_id>2218350</parent_id>
+      <deleted>false</deleted>
+      <default_assignee_id>-1</default_assignee_id>
+    </subcategory>
+    <assignee>
+      <group_id>12669266</group_id>
+      <is_user>true</is_user>
+      <id>11344229</id>
+      <name>Leighton Wedderburn</name>
+      <email>lwedderburn@wpb.org</email>
+      <avatar>
+        <type>initials</type>
+        <initials>LW</initials>
+        <color>var(--colors-foreground-7-600)</color>
+      </avatar>
+      <reports_to>
+        <group_id>10178933</group_id>
+        <is_user>true</is_user>
+        <id>9402438</id>
+        <name>James Judge</name>
+        <email>JJudge@wpb.org</email>
+        <avatar>
+          <type>initials</type>
+          <initials>JJ</initials>
+          <color>var(--colors-foreground-7-700)</color>
+        </avatar>
+      </reports_to>
+    </assignee>
+    <requester>
+      <id>10297696</id>
+      <account_id>87667</account_id>
+      <user_id>9402438</user_id>
+      <email>JJudge@wpb.org</email>
+      <name>James Judge</name>
+      <disabled>false</disabled>
+      <has_gravatar>false</has_gravatar>
+      <customer_satisfaction_survey_time>2025-07-08T13:23:58-04:00</customer_satisfaction_survey_time>
+      <avatar>
+        <type>initials</type>
+        <initials>JJ</initials>
+        <color>var(--colors-foreground-7-700)</color>
+      </avatar>
+    </requester>
+    <created_at>2025-07-01T20:56:30-04:00</created_at>
+    <updated_at>2025-07-09T21:05:46-04:00</updated_at>
+    <due_at>2025-07-18T00:00:00-04:00</due_at>
+    <sla_violations/>
+    <number_of_comments>4</number_of_comments>
+    <user_saw_all_comments>true</user_saw_all_comments>
+    <is_service_request>false</is_service_request>
+    <created_by>
+      <id>10297696</id>
+      <account_id>87667</account_id>
+      <user_id>9402438</user_id>
+      <email>JJudge@wpb.org</email>
+      <name>James Judge</name>
+      <disabled>false</disabled>
+      <has_gravatar>false</has_gravatar>
+      <customer_satisfaction_survey_time>2025-07-08T13:23:58-04:00</customer_satisfaction_survey_time>
+      <avatar>
+        <type>initials</type>
+        <initials>JJ</initials>
+        <color>var(--colors-foreground-7-700)</color>
+      </avatar>
+    </created_by>
+    <resolved_by nil="true"/>
+    <resolution_description nil="true"/>
+    <resolution_code nil="true"/>
+    <group_assignee>
+      <id>8738388</id>
+      <name>GIS</name>
+      <description></description>
+      <disabled>false</disabled>
+      <is_user>false</is_user>
+      <reports_to>
+        <id>-1</id>
+        <avatar nil="true"/>
+        <name nil="true"/>
+        <href>https://cityofwestpalmbeach.samanage.com/groups/-1.xml</href>
+      </reports_to>
+      <avatar>
+        <type>group</type>
+        <color>var(--colors-foreground-7-500)</color>
+        <klass>RealGroup</klass>
+      </avatar>
+      <type>RealGroup</type>
+      <send_notifications>true</send_notifications>
+      <custom_fields_values/>
+      <memberships>
+        <membership>
+          <id>11213210</id>
+          <type>User</type>
+          <user>Diana Alvarez</user>
+        </membership>
+      </memberships>
+    </group_assignee>
+    <customer_satisfaction_survey_sent_at nil="true"/>
+    <customer_satisfaction_survey_completed_at nil="true"/>
+    <custom>2025-07-02 00:56:31.368377</custom>
+    <href>https://cityofwestpalmbeach.samanage.com/incidents/159552407-gis-application-update-the-2018-and-2024-pavement-condition-comparision.xml</href>
+    <href_account_domain>https://cityofwestpalmbeach.samanage.com/incidents/159552407-gis-application-update-the-2018-and-2024-pavement-condition-comparision</href_account_domain>
+    <site nil="true"/>
+    <department>
+      <id>307486</id>
+      <name>Information Technology</name>
+      <description></description>
+      <default_assignee_id>-1</default_assignee_id>
+    </department>
+    <cc/>
+    <custom_fields_values>
+      <custom_fields_value>
+        <id>352743960</id>
+        <custom_field_id>3935086</custom_field_id>
+        <name>Created After Hours</name>
+        <value>1</value>
+        <attachment nil="true"/>
+        <options nil="true"/>
+        <type>3</type>
+        <type_name>Checkbox</type_name>
+        <entity nil="true"/>
+        <user nil="true"/>
+      </custom_fields_value>
+    </custom_fields_values>
+    <origin>web</origin>
+    <comments>
+      <comment>
+        <id>272071153</id>
+        <body> Updates made to previous project #26115. 
+ 
+ Created new working directory: 
+ 
+ "Q:\2025_Projects\Transportation\Ticket 31439 GIS Application - Update the 2018_2024 Pavement Condition Comparison_" 
+  Copied 2018 gdb layer in the default project db, updated the category field using the values provided.  
+ ***PCI Condition will need to be updated in the enterprise GDB.***  
+ WPB_GIS.DBO.DTS_CenterlinePCI_2018 
+ 
+ Published new web FS from most up to date enterprise GDB. 
+ 
+ WPB_GIS.DBO.RAS_Street_Condition (2024) 
+ WPB_GIS.DBO.DTS_CenterlinePCI_2018 
+ &lt;a href="https://wpbgisportal.wpb.org/server/rest/services/Transportation/2024_RAS_Street_Condition/FeatureServer"&gt;https://wpbgisportal.wpb.org/server/rest/services/Transportation/2024_RAS_Street_Condition/FeatureServer&lt;/a&gt; 
+ &lt;a href="https://wpbgisportal.wpb.org/server/rest/services/Transportation/2018_Pavement_Condition/FeatureServer"&gt;https://wpbgisportal.wpb.org/server/rest/services/Transportation/2018_Pavement_Condition/FeatureServer&lt;/a&gt; 
+   
+ 
+ Created new web maps. 
+ 
+ &lt;a href="https://wpbgisportal.wpb.org/server/rest/services/Transportation/2024_RAS_Street_Condition/MapServer"&gt;https://wpbgisportal.wpb.org/server/rest/services/Transportation/2024_RAS_Street_Condition/MapServer&lt;/a&gt; 
+ &lt;a href="https://wpbgisportal.wpb.org/server/rest/services/Transportation/2018_Pavement_Condition/MapServer"&gt;https://wpbgisportal.wpb.org/server/rest/services/Transportation/2018_Pavement_Condition/MapServer&lt;/a&gt; 
+   
+ 
+ Updated and reconfigured Dashboard App 
+ 
+ &lt;a href="https://wpbgisportal.wpb.org/portal/apps/dashboards/8f6a97a50b4f4e5b98885ed8f5c188a1"&gt;2018 and 2024 Pavement Condition Comparison&lt;/a&gt; </body>
+        <user>
+          <id>11344229</id>
+          <name>Leighton Wedderburn</name>
+          <email>lwedderburn@wpb.org</email>
+          <avatar>
+            <type>initials</type>
+            <initials>LW</initials>
+            <color>var(--colors-foreground-7-600)</color>
+          </avatar>
+        </user>
+        <created_at>2025-07-09T11:32:48-04:00</created_at>
+        <updated_at>2025-07-09T11:56:54-04:00</updated_at>
+        <attachments/>
+        <inline_attachments/>
+        <shared_attachments/>
+        <is_private>false</is_private>
+        <seen_by>
+          <seen_by>11344229</seen_by>
+          <seen_by>9402438</seen_by>
+          <seen_by>9402422</seen_by>
+          <seen_by>9402439</seen_by>
+        </seen_by>
+        <isTask>false</isTask>
+        <task_info>
+        </task_info>
+        <requester nil="true"/>
+        <commenter_id>159552407</commenter_id>
+        <commenter_type>Incident</commenter_type>
+        <origin>1</origin>
+      </comment>
+      <comment>
+        <id>272079621</id>
+        <body> Leighton, 
+ It's essential that services be published as needed if we already have an existing service what is the reason to publish a duplicate? I think you should be using the URL below as it's being edited by Engineering Dept.  
+ Add the 2024 map service (verify this URL with Alex) to the 2024 map. 
+ &lt;a href="https://wpbgisportal.wpb.org/portal/home/item.html?id=8f6a97a50b4f4e5b98885ed8f5c188a1"&gt;https://wpbgisportal.wpb.org/portal/home/item.html?id=8f6a97a50b4f4e5b98885ed8f5c188a1&lt;/a&gt; 
+ As for the 2018 DTS Pavement condition where the category values updated in the GIS using the PCI score? </body>
+        <user>
+          <id>9402438</id>
+          <name>James Judge</name>
+          <email>JJudge@wpb.org</email>
+          <avatar>
+            <type>initials</type>
+            <initials>JJ</initials>
+            <color>var(--colors-foreground-7-700)</color>
+          </avatar>
+        </user>
+        <created_at>2025-07-09T12:04:06-04:00</created_at>
+        <updated_at>2025-07-09T12:04:06-04:00</updated_at>
+        <attachments/>
+        <inline_attachments/>
+        <shared_attachments/>
+        <is_private>false</is_private>
+        <seen_by>
+          <seen_by>9402438</seen_by>
+          <seen_by>9402422</seen_by>
+          <seen_by>9402439</seen_by>
+          <seen_by>11344229</seen_by>
+        </seen_by>
+        <isTask>false</isTask>
+        <task_info>
+        </task_info>
+        <requester nil="true"/>
+        <commenter_id>159552407</commenter_id>
+        <commenter_type>Incident</commenter_type>
+        <origin>1</origin>
+      </comment>
+      <comment>
+        <id>272107827</id>
+        <body> Added Sync capability to both 2018/2024 maps in dashboard. ** Note: ArcGIS Dashboard will only sync on Pan/Zoom and not on feature select.** 
+ Made other minor changes. 
+ Communicated and coordinated with James and Alex. </body>
+        <user>
+          <id>11344229</id>
+          <name>Leighton Wedderburn</name>
+          <email>lwedderburn@wpb.org</email>
+          <avatar>
+            <type>initials</type>
+            <initials>LW</initials>
+            <color>var(--colors-foreground-7-600)</color>
+          </avatar>
+        </user>
+        <created_at>2025-07-09T14:01:37-04:00</created_at>
+        <updated_at>2025-07-09T14:06:03-04:00</updated_at>
+        <attachments/>
+        <inline_attachments/>
+        <shared_attachments/>
+        <is_private>false</is_private>
+        <seen_by>
+          <seen_by>11344229</seen_by>
+          <seen_by>9402439</seen_by>
+          <seen_by>9402438</seen_by>
+        </seen_by>
+        <isTask>false</isTask>
+        <task_info>
+        </task_info>
+        <requester nil="true"/>
+        <commenter_id>159552407</commenter_id>
+        <commenter_type>Incident</commenter_type>
+        <origin>1</origin>
+      </comment>
+      <comment>
+        <id>272168218</id>
+        <body> The data has been refreshed in the geodatabase </body>
+        <user>
+          <id>9402438</id>
+          <name>James Judge</name>
+          <email>JJudge@wpb.org</email>
+          <avatar>
+            <type>initials</type>
+            <initials>JJ</initials>
+            <color>var(--colors-foreground-7-700)</color>
+          </avatar>
+        </user>
+        <created_at>2025-07-09T21:05:46-04:00</created_at>
+        <updated_at>2025-07-09T21:05:46-04:00</updated_at>
+        <attachments/>
+        <inline_attachments/>
+        <shared_attachments/>
+        <is_private>false</is_private>
+        <seen_by>
+          <seen_by>9402438</seen_by>
+          <seen_by>9402439</seen_by>
+          <seen_by>11344229</seen_by>
+        </seen_by>
+        <isTask>false</isTask>
+        <task_info>
+        </task_info>
+        <requester nil="true"/>
+        <commenter_id>159552407</commenter_id>
+        <commenter_type>Incident</commenter_type>
+        <origin>1</origin>
+      </comment>
+    </comments>
+    <attachments/>
+    <statistics>
+      <statistic>
+        <statistic_type>last_reassigned</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-07-06T12:49:00-04:00","history":[{"id":10178933,"title":"James Judge","startTime":"2025-07-01T20:56:30.000-04:00","endTime":"2025-07-06T16:49:00.001+00:00","timeSpent":402750,"timeSpentBH":72000,"timeSinceCreation":0,"timeSinceCreationBH":0,"isCurrent":false,"isDeleted":false}],"summary":{"-1":0.498097425,"10178933":402750.116346397},"bh_summary":{"10178933":72000}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>last_state_change</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-07-09T11:33:53-04:00","history":[{"id":1095264,"title":"","startTime":"2025-07-01T20:56:30.000-04:00","endTime":"2025-07-06T16:49:00.118+00:00","timeSpent":402750,"timeSpentBH":72000,"timeSinceCreation":0,"timeSinceCreationBH":0,"isCurrent":false,"isDeleted":false},{"id":1095266,"title":"","startTime":"2025-07-06T12:49:00.000-04:00","endTime":"2025-07-08T18:20:57.241+00:00","timeSpent":178317,"timeSpentBH":62457,"timeSinceCreation":402750,"timeSinceCreationBH":72000,"isCurrent":false,"isDeleted":false},{"id":1095265,"title":"","startTime":"2025-07-08T14:20:57.000-04:00","endTime":"2025-07-09T15:33:53.530+00:00","timeSpent":76377,"timeSpentBH":25977,"timeSinceCreation":581067,"timeSinceCreationBH":134457,"isCurrent":false,"isDeleted":false}],"summary":{"1095264":402750.197916788,"1095266":178317.365154547,"1095265":76376.633060669},"bh_summary":{"1095264":72000,"1095266":62457,"1095265":25977}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>to_assignment</statistic_type>
+        <time>00:00</time>
+        <time_elapsed>00:00</time_elapsed>
+        <business_time_elapsed>00:00</business_time_elapsed>
+        <value>2025-07-02 00:56:30 UTC</value>
+      </statistic>
+      <statistic>
+        <statistic_type>State Changed</statistic_type>
+        <time>182:38</time>
+        <time_elapsed>182:38</time_elapsed>
+        <business_time_elapsed>44:34</business_time_elapsed>
+        <value>2025-07-09 15:33:53 UTC</value>
+      </statistic>
+      <statistic>
+        <statistic_type>assignee_opened_show</statistic_type>
+        <time>00:01</time>
+        <time_elapsed>00:01</time_elapsed>
+        <business_time_elapsed>00:00</business_time_elapsed>
+        <value>10178933</value>
+      </statistic>
+      <statistic>
+        <statistic_type>last_group_reassigned</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-07-01T20:57:59-04:00","history":[],"summary":{}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>reassignments</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>1</value>
+      </statistic>
+      <statistic>
+        <statistic_type>assignee_opened_show</statistic_type>
+        <time>161:24</time>
+        <time_elapsed>161:24</time_elapsed>
+        <business_time_elapsed>37:21</business_time_elapsed>
+        <value>12669266</value>
+      </statistic>
+      <statistic>
+        <statistic_type>to_first_response</statistic_type>
+        <time>182:37</time>
+        <time_elapsed>182:37</time_elapsed>
+        <business_time_elapsed>44:33</business_time_elapsed>
+        <value>2025-07-09 15:32:48 UTC</value>
+      </statistic>
+    </statistics>
+    <tags>
+      <tag>
+        <name>Service Request</name>
+      </tag>
+      <tag>
+        <name>Information Technology</name>
+      </tag>
+    </tags>
+    <incidents/>
+    <changes/>
+    <solutions/>
+    <associated_sla_names/>
+    <is_customer_satisfied nil="true"/>
+    <customer_satisfaction_response nil="true"/>
+    <total_time_spent>420</total_time_spent>
+    <resolution nil="true"/>
+    <resolution_type nil="true"/>
+    <tasks/>
+    <time_tracks>
+      <time_track>
+        <id>11765892</id>
+        <href>https://cityofwestpalmbeach.samanage.com/incidents/159552407/time_tracks/11765892.xml</href>
+      </time_track>
+      <time_track>
+        <id>11767547</id>
+        <href>https://cityofwestpalmbeach.samanage.com/incidents/159552407/time_tracks/11767547.xml</href>
+      </time_track>
+      <time_track>
+        <id>11768609</id>
+        <href>https://cityofwestpalmbeach.samanage.com/incidents/159552407/time_tracks/11768609.xml</href>
+      </time_track>
+    </time_tracks>
+    <assets/>
+    <mobiles/>
+    <other_assets/>
+    <configuration_items/>
+    <discovery_hardwares/>
+    <purchase_orders/>
+    <releases/>
+    <problems/>
+    <request_variables>
+      <request_variable>
+        <id>352743960</id>
+        <custom_field_id>3935086</custom_field_id>
+        <name>Created After Hours</name>
+        <value>1</value>
+        <attachment nil="true"/>
+        <options nil="true"/>
+        <type>3</type>
+        <type_name>Checkbox</type_name>
+        <entity nil="true"/>
+        <user nil="true"/>
+      </request_variable>
+    </request_variables>
+  </incident>
+  <incident>
+    <id>159540960</id>
+    <number>31435</number>
+    <name>GIS Support - Remove fill from water as-built polygon</name>
+    <description> GIS requests (GIS Data add/change, Addressing, Maps, Web App, etc) </description>
+    <description_no_html>GIS requests (GIS Data add/change, Addressing, Maps, Web App, etc)</description_no_html>
+    <state>Assigned</state>
+    <priority>Medium</priority>
+    <category>
+      <id>2218350</id>
+      <name>SR_GIS</name>
+      <default_tags>Service Request</default_tags>
+      <parent_id nil="true"/>
+      <deleted>false</deleted>
+      <default_assignee_id>-1</default_assignee_id>
+    </category>
+    <subcategory>
+      <id>2497053</id>
+      <name>'SR_' Add / Change GIS Data</name>
+      <default_tags></default_tags>
+      <parent_id>2218350</parent_id>
+      <deleted>false</deleted>
+      <default_assignee_id>-1</default_assignee_id>
+    </subcategory>
+    <assignee>
+      <group_id>12669266</group_id>
+      <is_user>true</is_user>
+      <id>11344229</id>
+      <name>Leighton Wedderburn</name>
+      <email>lwedderburn@wpb.org</email>
+      <avatar>
+        <type>initials</type>
+        <initials>LW</initials>
+        <color>var(--colors-foreground-7-600)</color>
+      </avatar>
+      <reports_to>
+        <group_id>10178933</group_id>
+        <is_user>true</is_user>
+        <id>9402438</id>
+        <name>James Judge</name>
+        <email>JJudge@wpb.org</email>
+        <avatar>
+          <type>initials</type>
+          <initials>JJ</initials>
+          <color>var(--colors-foreground-7-700)</color>
+        </avatar>
+      </reports_to>
+    </assignee>
+    <requester>
+      <id>10322578</id>
+      <account_id>87667</account_id>
+      <user_id>9422736</user_id>
+      <email>DPayne@wpb.org</email>
+      <name>Debbie Payne</name>
+      <disabled>false</disabled>
+      <has_gravatar>false</has_gravatar>
+      <customer_satisfaction_survey_time>2025-05-09T16:31:38-04:00</customer_satisfaction_survey_time>
+      <avatar>
+        <type>initials</type>
+        <initials>DP</initials>
+        <color>var(--colors-foreground-7-100)</color>
+      </avatar>
+    </requester>
+    <created_at>2025-07-01T16:35:12-04:00</created_at>
+    <updated_at>2025-07-06T12:28:05-04:00</updated_at>
+    <due_at>2025-07-10T00:00:00-04:00</due_at>
+    <sla_violations/>
+    <number_of_comments>0</number_of_comments>
+    <user_saw_all_comments>true</user_saw_all_comments>
+    <is_service_request>true</is_service_request>
+    <created_by>
+      <id>10322578</id>
+      <account_id>87667</account_id>
+      <user_id>9422736</user_id>
+      <email>DPayne@wpb.org</email>
+      <name>Debbie Payne</name>
+      <disabled>false</disabled>
+      <has_gravatar>false</has_gravatar>
+      <customer_satisfaction_survey_time>2025-05-09T16:31:38-04:00</customer_satisfaction_survey_time>
+      <avatar>
+        <type>initials</type>
+        <initials>DP</initials>
+        <color>var(--colors-foreground-7-100)</color>
+      </avatar>
+    </created_by>
+    <resolved_by nil="true"/>
+    <resolution_description nil="true"/>
+    <resolution_code nil="true"/>
+    <group_assignee>
+      <id>8738388</id>
+      <name>GIS</name>
+      <description></description>
+      <disabled>false</disabled>
+      <is_user>false</is_user>
+      <reports_to>
+        <id>-1</id>
+        <avatar nil="true"/>
+        <name nil="true"/>
+        <href>https://cityofwestpalmbeach.samanage.com/groups/-1.xml</href>
+      </reports_to>
+      <avatar>
+        <type>group</type>
+        <color>var(--colors-foreground-7-500)</color>
+        <klass>RealGroup</klass>
+      </avatar>
+      <type>RealGroup</type>
+      <send_notifications>true</send_notifications>
+      <custom_fields_values/>
+      <memberships>
+        <membership>
+          <id>11213210</id>
+          <type>User</type>
+          <user>Diana Alvarez</user>
+        </membership>
+      </memberships>
+    </group_assignee>
+    <customer_satisfaction_survey_sent_at nil="true"/>
+    <customer_satisfaction_survey_completed_at nil="true"/>
+    <custom>2025-07-01 20:35:13.947537</custom>
+    <href>https://cityofwestpalmbeach.samanage.com/incidents/159540960-gis-support-remove-fill-from-water-as-built-polygon.xml</href>
+    <href_account_domain>https://cityofwestpalmbeach.samanage.com/incidents/159540960-gis-support-remove-fill-from-water-as-built-polygon</href_account_domain>
+    <site>
+      <id>205261</id>
+      <name>CityHall</name>
+      <location>CityHall</location>
+      <description></description>
+      <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+      <language>-1</language>
+      <business_record nil="true"/>
+    </site>
+    <department>
+      <id>325528</id>
+      <name>Public Utilities Department</name>
+      <description></description>
+      <default_assignee_id nil="true"/>
+    </department>
+    <cc>
+      <cc>Laura Le &lt;LLe@wpb.org&gt;</cc>
+      <cc>Victor Carosi &lt;vcarosi@wpb.org&gt;</cc>
+    </cc>
+    <custom_fields_values>
+      <custom_fields_value>
+        <id>352715348</id>
+        <custom_field_id>3004989</custom_field_id>
+        <name>Additional Information</name>
+        <value>The as-built polygons in the Water Distribution GIS viewer shows the pending as-builts polygons highlighted in red.  There is a 'whitish' fill inside of the  polygon that blurs out what is behind the pending as-built polygon.  Can the 'fill' be removed? We really need the ability to see what is behind the polygon. TY</value>
+        <attachment nil="true"/>
+        <options></options>
+        <type>6</type>
+        <type_name>Text_Area</type_name>
+        <entity nil="true"/>
+        <user nil="true"/>
+      </custom_fields_value>
+      <custom_fields_value>
+        <id>352715349</id>
+        <custom_field_id>3732139</custom_field_id>
+        <name>Request Type (GIS)</name>
+        <value>Add/Change GIS  Data</value>
+        <attachment nil="true"/>
+        <options>Add/Change GIS  Data Addressing Request Anaylasis &amp; Report Creation Information &amp; Data Request Map Request User Account Access Web Application Other</options>
+        <type>2</type>
+        <type_name>Dropdown</type_name>
+        <entity nil="true"/>
+        <user nil="true"/>
+      </custom_fields_value>
+    </custom_fields_values>
+    <origin>external</origin>
+    <price nil="true"/>
+    <comments/>
+    <attachments/>
+    <statistics>
+      <statistic>
+        <statistic_type>last_state_change</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-07-01T16:58:48-04:00","history":[{"id":1095264,"title":"","startTime":"2025-07-01T16:35:12.000-04:00","endTime":"2025-07-01T20:58:48.114+00:00","timeSpent":1416,"timeSpentBH":1416,"timeSinceCreation":0,"timeSinceCreationBH":0,"isCurrent":false,"isDeleted":false}],"summary":{"1095264":1416.198051768},"bh_summary":{"1095264":1416}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>State Changed</statistic_type>
+        <time>00:00</time>
+        <time_elapsed>00:00</time_elapsed>
+        <business_time_elapsed>00:00</business_time_elapsed>
+        <value>2025-07-01 20:35:12 UTC</value>
+      </statistic>
+      <statistic>
+        <statistic_type>reassignments</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>3</value>
+      </statistic>
+      <statistic>
+        <statistic_type>last_reassigned</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-07-06T12:28:05-04:00","history":[{"id":8738352,"title":"City Hall Help Desk","startTime":"2025-07-01T20:35:14.000+00:00","endTime":"2025-07-01T20:58:48.028+00:00","timeSpent":1414,"timeSpentBH":1414,"timeSinceCreation":2,"timeSinceCreationBH":2,"isCurrent":false,"isDeleted":false},{"id":10178933,"title":"James Judge","startTime":"2025-07-01T16:58:48.000-04:00","endTime":"2025-07-06T16:28:05.567+00:00","timeSpent":415758,"timeSpentBH":72072,"timeSinceCreation":1416,"timeSinceCreationBH":1416,"isCurrent":false,"isDeleted":false}],"summary":{"8738352":1414.112008794,"10178933":415757.632709275},"bh_summary":{"8738352":1414,"10178933":72072}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>assignee_opened_show</statistic_type>
+        <time>00:24</time>
+        <time_elapsed>00:24</time_elapsed>
+        <business_time_elapsed>00:24</business_time_elapsed>
+        <value>8738352</value>
+      </statistic>
+      <statistic>
+        <statistic_type>to_assignment</statistic_type>
+        <time>00:24</time>
+        <time_elapsed>00:24</time_elapsed>
+        <business_time_elapsed>00:24</business_time_elapsed>
+        <value>2025-07-01 20:58:47 UTC</value>
+      </statistic>
+      <statistic>
+        <statistic_type>assignee_opened_show</statistic_type>
+        <time>17:26</time>
+        <time_elapsed>17:26</time_elapsed>
+        <business_time_elapsed>03:26</business_time_elapsed>
+        <value>10178933</value>
+      </statistic>
+      <statistic>
+        <statistic_type>last_group_reassigned</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-07-02T10:01:20-04:00","history":[],"summary":{}}</value>
+      </statistic>
+    </statistics>
+    <tags>
+      <tag>
+        <name>Service Request</name>
+      </tag>
+      <tag>
+        <name>CityHall</name>
+      </tag>
+      <tag>
+        <name>Public Utilities Department</name>
+      </tag>
+    </tags>
+    <incidents/>
+    <changes/>
+    <solutions/>
+    <associated_sla_names/>
+    <is_customer_satisfied nil="true"/>
+    <customer_satisfaction_response nil="true"/>
+    <total_time_spent>0</total_time_spent>
+    <resolution nil="true"/>
+    <resolution_type nil="true"/>
+    <tasks/>
+    <time_tracks/>
+    <assets/>
+    <mobiles/>
+    <other_assets/>
+    <configuration_items/>
+    <discovery_hardwares/>
+    <purchase_orders/>
+    <releases/>
+    <problems/>
+    <request_variables>
+      <request_variable>
+        <id>352715348</id>
+        <custom_field_id>3004989</custom_field_id>
+        <name>Additional Information</name>
+        <value>The as-built polygons in the Water Distribution GIS viewer shows the pending as-builts polygons highlighted in red.  There is a 'whitish' fill inside of the  polygon that blurs out what is behind the pending as-built polygon.  Can the 'fill' be removed? We really need the ability to see what is behind the polygon. TY</value>
+        <attachment nil="true"/>
+        <options></options>
+        <type>6</type>
+        <type_name>Text_Area</type_name>
+        <entity nil="true"/>
+        <user nil="true"/>
+      </request_variable>
+      <request_variable>
+        <id>352715349</id>
+        <custom_field_id>3732139</custom_field_id>
+        <name>Request Type (GIS)</name>
+        <value>Add/Change GIS  Data</value>
+        <attachment nil="true"/>
+        <options>Add/Change GIS  Data Addressing Request Anaylasis &amp; Report Creation Information &amp; Data Request Map Request User Account Access Web Application Other</options>
+        <type>2</type>
+        <type_name>Dropdown</type_name>
+        <entity nil="true"/>
+        <user nil="true"/>
+      </request_variable>
+    </request_variables>
+    <cc_groups>
+      <cc_group>
+        <id>10200885</id>
+        <name>Laura Le</name>
+        <email>LLe@wpb.org</email>
+        <disabled>false</disabled>
+        <is_user>true</is_user>
+        <user_id>9421933</user_id>
+        <reports_to>
+          <id>-1</id>
+          <avatar nil="true"/>
+          <name nil="true"/>
+          <href>https://cityofwestpalmbeach.samanage.com/groups/-1.xml</href>
+        </reports_to>
+        <avatar>
+          <type>initials</type>
+          <initials>LL</initials>
+          <color>var(--colors-foreground-7-600)</color>
+          <klass>UserGroup</klass>
+        </avatar>
+        <type>UserGroup</type>
+        <send_notifications>true</send_notifications>
+        <custom_fields_values/>
+      </cc_group>
+      <cc_group>
+        <id>10201877</id>
+        <name>Victor Carosi</name>
+        <email>vcarosi@wpb.org</email>
+        <disabled>false</disabled>
+        <is_user>true</is_user>
+        <user_id>9422907</user_id>
+        <reports_to>
+          <id>-1</id>
+          <avatar nil="true"/>
+          <name nil="true"/>
+          <href>https://cityofwestpalmbeach.samanage.com/groups/-1.xml</href>
+        </reports_to>
+        <avatar>
+          <type>initials</type>
+          <initials>VC</initials>
+          <color>var(--colors-foreground-7-400)</color>
+          <klass>UserGroup</klass>
+        </avatar>
+        <type>UserGroup</type>
+        <send_notifications>true</send_notifications>
+        <custom_fields_values/>
+      </cc_group>
+    </cc_groups>
+    <completed>true</completed>
+    <no_process>true</no_process>
+  </incident>
+  <page>1</page>
+  <per_page>1000000000</per_page>
+  <total_entries>3</total_entries>
+</incidents>
