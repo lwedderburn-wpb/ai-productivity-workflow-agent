@@ -4,10 +4,88 @@ import json
 import os
 from datetime import datetime
 import re
+import xml.etree.ElementTree as ET
 from typing import Dict, List, Any
 
 app = Flask(__name__, template_folder='../templates')
 app.secret_key = 'your-secret-key-here'
+
+class XMLTicketParser:
+    """Parse ticket information from XML files"""
+    
+    @staticmethod
+    def parse_xml_file(xml_content: str) -> List[Dict[str, Any]]:
+        """Parse XML content and extract ticket information"""
+        try:
+            root = ET.fromstring(xml_content)
+            tickets = []
+            
+            # Handle different XML structures
+            # Structure 1: <tickets><ticket>...</ticket></tickets>
+            if root.tag == 'tickets':
+                for ticket_elem in root.findall('ticket'):
+                    ticket = XMLTicketParser._extract_ticket_data(ticket_elem)
+                    if ticket:
+                        tickets.append(ticket)
+            
+            # Structure 2: <ticket>...</ticket> (single ticket)
+            elif root.tag == 'ticket':
+                ticket = XMLTicketParser._extract_ticket_data(root)
+                if ticket:
+                    tickets.append(ticket)
+            
+            # Structure 3: Custom root with ticket elements
+            else:
+                for ticket_elem in root.iter('ticket'):
+                    ticket = XMLTicketParser._extract_ticket_data(ticket_elem)
+                    if ticket:
+                        tickets.append(ticket)
+            
+            return tickets
+            
+        except ET.ParseError as e:
+            raise ValueError(f"Invalid XML format: {str(e)}")
+        except Exception as e:
+            raise ValueError(f"Error parsing XML: {str(e)}")
+    
+    @staticmethod
+    def _extract_ticket_data(ticket_elem) -> Dict[str, Any]:
+        """Extract ticket data from XML element"""
+        ticket = {}
+        
+        # Common field mappings
+        field_mappings = {
+            'id': ['id', 'ticket_id', 'ticketId', 'number'],
+            'subject': ['subject', 'title', 'summary'],
+            'description': ['description', 'details', 'body', 'content'],
+            'priority': ['priority', 'urgency', 'severity'],
+            'category': ['category', 'type', 'classification'],
+            'requester': ['requester', 'user', 'customer', 'reporter'],
+            'status': ['status', 'state'],
+            'created_date': ['created', 'date_created', 'timestamp', 'submitted'],
+            'assigned_to': ['assigned_to', 'assignee', 'owner']
+        }
+        
+        # Extract data using multiple possible field names
+        for field, possible_names in field_mappings.items():
+            for name in possible_names:
+                elem = ticket_elem.find(name)
+                if elem is not None and elem.text:
+                    ticket[field] = elem.text.strip()
+                    break
+                # Try as attribute
+                if ticket_elem.get(name):
+                    ticket[field] = ticket_elem.get(name).strip()
+                    break
+        
+        # Ensure required fields
+        if not ticket.get('id'):
+            ticket['id'] = f"XML-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+        
+        if not ticket.get('subject') and not ticket.get('description'):
+            return None  # Skip invalid tickets
+        
+        return ticket
 
 class GISTicketAgent:
     def __init__(self):
@@ -201,6 +279,52 @@ def generate_response():
     
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/api/import_xml', methods=['POST'])
+def import_xml():
+    """Import tickets from XML file"""
+    try:
+        if 'xml_file' not in request.files:
+            return jsonify({'error': 'No XML file provided'}), 400
+        
+        xml_file = request.files['xml_file']
+        if xml_file.filename == '':
+            return jsonify({'error': 'No file selected'}), 400
+        
+        if not xml_file.filename.lower().endswith('.xml'):
+            return jsonify({'error': 'File must be an XML file'}), 400
+        
+        # Read XML content
+        xml_content = xml_file.read().decode('utf-8')
+        
+        # Parse XML and extract tickets
+        parser = XMLTicketParser()
+        tickets = parser.parse_xml_file(xml_content)
+        
+        if not tickets:
+            return jsonify({'error': 'No valid tickets found in XML file'}), 400
+        
+        # Analyze each ticket
+        results = []
+        for ticket in tickets:
+            analysis = gis_agent.analyze_ticket(ticket)
+            results.append({
+                'ticket_id': ticket.get('id'),
+                'ticket_data': ticket,
+                'analysis': analysis
+            })
+        
+        return jsonify({
+            'status': 'success',
+            'message': f'Successfully imported {len(tickets)} tickets from XML',
+            'total_imported': len(tickets),
+            'results': results
+        })
+    
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+    except Exception as e:
+        return jsonify({'error': f'Failed to process XML file: {str(e)}'}), 500
 
 @app.route('/api/stats', methods=['GET'])
 def get_stats():
