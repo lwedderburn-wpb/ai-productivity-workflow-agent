@@ -28,16 +28,33 @@ class XMLTicketParser:
                     if ticket:
                         tickets.append(ticket)
             
-            # Structure 2: <ticket>...</ticket> (single ticket)
+            # Structure 2: <incidents><incident>...</incident></incidents>
+            elif root.tag == 'incidents':
+                for ticket_elem in root.findall('incident'):
+                    ticket = XMLTicketParser._extract_ticket_data(ticket_elem)
+                    if ticket:
+                        tickets.append(ticket)
+            
+            # Structure 3: <ticket>...</ticket> (single ticket)
             elif root.tag == 'ticket':
                 ticket = XMLTicketParser._extract_ticket_data(root)
                 if ticket:
                     tickets.append(ticket)
             
-            # Structure 3: Custom root with ticket elements
+            # Structure 4: <incident>...</incident> (single incident)
+            elif root.tag == 'incident':
+                ticket = XMLTicketParser._extract_ticket_data(root)
+                if ticket:
+                    tickets.append(ticket)
+            
+            # Structure 5: Custom root with ticket or incident elements
             else:
                 for ticket_elem in root.iter('ticket'):
                     ticket = XMLTicketParser._extract_ticket_data(ticket_elem)
+                    if ticket:
+                        tickets.append(ticket)
+                for incident_elem in root.iter('incident'):
+                    ticket = XMLTicketParser._extract_ticket_data(incident_elem)
                     if ticket:
                         tickets.append(ticket)
             
