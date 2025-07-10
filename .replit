@@ -2,3 +2,16 @@ modules = ["python-3.12"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["glibcLocales"]
+
+[workflows]
+runButton = "Run GIS AI Agent"
+
+[[workflows.workflow]]
+name = "Run GIS AI Agent"
+author = 39423300
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python src/app.py"
