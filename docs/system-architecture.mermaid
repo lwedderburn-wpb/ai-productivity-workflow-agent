@@ -1,0 +1,153 @@
+graph TD
+    subgraph "Authentication Layer"
+        A1[Microsoft ADFS]
+        A2[Azure AD]
+        A3[Session Management]
+        A4[User Permissions]
+    end
+    
+    subgraph "User Interface Layer"
+        B1[Web Dashboard]
+        B2[Mobile App]
+        B3[Desktop Client]
+        B4[API Interface]
+    end
+    
+    subgraph "AI Agent Core"
+        C1[Request Handler]
+        C2[Task Orchestrator]
+        C3[Decision Engine]
+        C4[Learning Module]
+        C5[Response Generator]
+        C6[Quality Assurance]
+    end
+    
+    subgraph "Data Processing Layer"
+        D1[Data Ingestion]
+        D2[ETL Pipeline]
+        D3[Data Validation]
+        D4[Pattern Recognition]
+        D5[Classification Engine]
+        D6[Sentiment Analysis]
+    end
+    
+    subgraph "Integration Services"
+        E1[SolarWinds API]
+        E2[ArcGIS Services]
+        E3[Microsoft Graph]
+        E4[Email Services]
+        E5[Teams Integration]
+        E6[SharePoint Connector]
+    end
+    
+    subgraph "AI/ML Services"
+        F1[Natural Language Processing]
+        F2[Machine Learning Models]
+        F3[Computer Vision]
+        F4[Predictive Analytics]
+        F5[Recommendation Engine]
+        F6[Anomaly Detection]
+    end
+    
+    subgraph "Data Storage"
+        G1[User Database]
+        G2[Ticket Database]
+        G3[Knowledge Base]
+        G4[Analytics Store]
+        G5[Cache Layer]
+        G6[Audit Logs]
+    end
+    
+    subgraph "Monitoring & Analytics"
+        H1[Performance Metrics]
+        H2[User Analytics]
+        H3[System Health]
+        H4[Error Tracking]
+        H5[Usage Reports]
+        H6[Feedback Analysis]
+    end
+    
+    %% Authentication connections
+    A1 --> A3
+    A2 --> A3
+    A3 --> A4
+    
+    %% UI Layer connections
+    B1 --> C1
+    B2 --> C1
+    B3 --> C1
+    B4 --> C1
+    
+    %% AI Agent Core connections
+    C1 --> C2
+    C2 --> C3
+    C3 --> C4
+    C3 --> C5
+    C5 --> C6
+    C4 --> C5
+    
+    %% Data Processing connections
+    D1 --> D2
+    D2 --> D3
+    D3 --> D4
+    D4 --> D5
+    D5 --> D6
+    
+    %% Integration connections
+    E1 --> D1
+    E2 --> D1
+    E3 --> D1
+    E4 --> C5
+    E5 --> C5
+    E6 --> D1
+    
+    %% AI/ML connections
+    F1 --> C3
+    F2 --> C3
+    F3 --> D4
+    F4 --> C3
+    F5 --> C5
+    F6 --> H3
+    
+    %% Storage connections
+    D6 --> G1
+    C6 --> G2
+    F5 --> G3
+    H1 --> G4
+    C1 --> G5
+    C2 --> G6
+    
+    %% Monitoring connections
+    C6 --> H1
+    B1 --> H2
+    G5 --> H3
+    C1 --> H4
+    H2 --> H5
+    C4 --> H6
+    
+    %% Cross-layer connections
+    A4 --> B1
+    C2 --> D1
+    C3 --> F1
+    C5 --> E4
+    G3 --> F2
+    H6 --> C4
+    
+    %% Styling
+    classDef authStyle fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef uiStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef aiStyle fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef dataStyle fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef integStyle fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef mlStyle fill:#f1f8e9,stroke:#689f38,stroke-width:2px
+    classDef storageStyle fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+    classDef monitorStyle fill:#fff8e1,stroke:#fbc02d,stroke-width:2px
+    
+    class A1,A2,A3,A4 authStyle
+    class B1,B2,B3,B4 uiStyle
+    class C1,C2,C3,C4,C5,C6 aiStyle
+    class D1,D2,D3,D4,D5,D6 dataStyle
+    class E1,E2,E3,E4,E5,E6 integStyle
+    class F1,F2,F3,F4,F5,F6 mlStyle
+    class G1,G2,G3,G4,G5,G6 storageStyle
+    class H1,H2,H3,H4,H5,H6 monitorStyle

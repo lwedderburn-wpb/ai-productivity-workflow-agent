@@ -1,0 +1,19 @@
+flowchart TD
+    A[User Initiation<br/>Access Microsoft ADFS] --> B[Input Data<br/>User inputs data or selects task]
+    B --> C[Data Processing<br/>AI Agent processes input using algorithms/models]
+    C --> D[Task Automation<br/>AI Agent performs automated tasks]
+    D --> E[Output Generation<br/>Generate reports, summaries, suggestions]
+    E --> F[User Review<br/>User reviews AI output]
+    F --> G{User Satisfied?}
+    G -->|No| H[Feedback Loop<br/>User provides feedback for improvement]
+    H --> C
+    G -->|Yes| I[End Process<br/>User can initiate new task or exit]
+    I --> J{Continue?}
+    J -->|Yes| A
+    J -->|No| K[Exit Application]
+    
+    style A fill:#e1f5fe
+    style K fill:#ffebee
+    style G fill:#fff3e0
+    style J fill:#fff3e0
+    style H fill:#f3e5f5
