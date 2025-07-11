@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, jsonify, session
 import json
 import os
@@ -6,6 +5,7 @@ from datetime import datetime
 import re
 import xml.etree.ElementTree as ET
 from typing import Dict, List, Any
+from ai_agent import EnhancedGISTicketAgent
 
 app = Flask(__name__, template_folder='../templates')
 app.secret_key = 'your-secret-key-here'
@@ -28,16 +28,33 @@ class XMLTicketParser:
                     if ticket:
                         tickets.append(ticket)
             
-            # Structure 2: <ticket>...</ticket> (single ticket)
+            # Structure 2: <incidents><incident>...</incident></incidents>
+            elif root.tag == 'incidents':
+                for ticket_elem in root.findall('incident'):
+                    ticket = XMLTicketParser._extract_incident_data(ticket_elem)
+                    if ticket:
+                        tickets.append(ticket)
+            
+            # Structure 3: <ticket>...</ticket> (single ticket)
             elif root.tag == 'ticket':
                 ticket = XMLTicketParser._extract_ticket_data(root)
                 if ticket:
                     tickets.append(ticket)
             
-            # Structure 3: Custom root with ticket elements
+            # Structure 4: <incident>...</incident> (single incident)
+            elif root.tag == 'incident':
+                ticket = XMLTicketParser._extract_incident_data(root)
+                if ticket:
+                    tickets.append(ticket)
+            
+            # Structure 5: Custom root with ticket/incident elements
             else:
                 for ticket_elem in root.iter('ticket'):
                     ticket = XMLTicketParser._extract_ticket_data(ticket_elem)
+                    if ticket:
+                        tickets.append(ticket)
+                for ticket_elem in root.iter('incident'):
+                    ticket = XMLTicketParser._extract_incident_data(ticket_elem)
                     if ticket:
                         tickets.append(ticket)
             
@@ -87,130 +104,101 @@ class XMLTicketParser:
         
         return ticket
 
-class GISTicketAgent:
-    def __init__(self):
-        self.ticket_categories = {
-            'arcgis_pro': ['arcgis pro', 'pro', 'desktop', 'crash', 'slow performance'],
-            'web_mapping': ['web map', 'portal', 'online', 'web application', 'viewer'],
-            'data_issues': ['data', 'layer', 'shapefile', 'geodatabase', 'feature class'],
-            'permissions': ['access', 'permission', 'login', 'authentication', 'user'],
-            'printing': ['print', 'map book', 'layout', 'export', 'pdf'],
-            'mobile': ['collector', 'survey123', 'field maps', 'mobile']
+    @staticmethod
+    def _extract_incident_data(incident_elem) -> Dict[str, Any]:
+        """Extract incident data from XML element (ServiceNow/Samanage format)"""
+        ticket = {}
+        
+        # Direct field mappings for incident XML structure
+        field_mappings = {
+            'id': 'id',
+            'number': 'number', 
+            'subject': 'name',
+            'description': 'description_no_html',
+            'priority': 'priority',
+            'status': 'state',
+            'created_date': 'created_at',
+            'updated_date': 'updated_at',
+            'due_date': 'due_at'
         }
         
-        self.priority_keywords = {
-            'high': ['urgent', 'critical', 'down', 'not working', 'broken', 'emergency'],
-            'medium': ['slow', 'issue', 'problem', 'help', 'support'],
-            'low': ['question', 'how to', 'training', 'enhancement', 'request']
-        }
+        # Extract basic fields
+        for field, xml_tag in field_mappings.items():
+            elem = incident_elem.find(xml_tag)
+            if elem is not None and elem.text:
+                ticket[field] = elem.text.strip()
         
-        self.response_templates = {
-            'arcgis_pro': """Thank you for reporting the ArcGIS Pro issue. I've analyzed your request and identified the most likely cause. Please try the following:
-
-1. Close ArcGIS Pro completely
-2. Clear the application cache: %LOCALAPPDATA%\\ESRI\\ArcGISPro\\
-3. Restart your computer
-4. Try opening ArcGIS Pro again
-
-If the issue persists, please let me know and I'll escalate this to our GIS team for further investigation.
-
-Best regards,
-GIS Support Team""",
+        # Extract requester information
+        requester_elem = incident_elem.find('requester')
+        if requester_elem is not None:
+            name_elem = requester_elem.find('name')
+            email_elem = requester_elem.find('email')
+            if name_elem is not None and name_elem.text:
+                ticket['requester'] = name_elem.text.strip()
+            if email_elem is not None and email_elem.text:
+                ticket['requester_email'] = email_elem.text.strip()
+        
+        # Extract assignee information  
+        assignee_elem = incident_elem.find('assignee')
+        if assignee_elem is not None:
+            name_elem = assignee_elem.find('name')
+            email_elem = assignee_elem.find('email')
+            if name_elem is not None and name_elem.text:
+                ticket['assigned_to'] = name_elem.text.strip()
+            if email_elem is not None and email_elem.text:
+                ticket['assigned_to_email'] = email_elem.text.strip()
+        
+        # Extract category information
+        category_elem = incident_elem.find('category')
+        if category_elem is not None:
+            name_elem = category_elem.find('name')
+            if name_elem is not None and name_elem.text:
+                ticket['category'] = name_elem.text.strip()
+        
+        # Extract subcategory information
+        subcategory_elem = incident_elem.find('subcategory')
+        if subcategory_elem is not None:
+            name_elem = subcategory_elem.find('name')
+            if name_elem is not None and name_elem.text:
+                ticket['subcategory'] = name_elem.text.strip()
+        
+        # Extract group assignee
+        group_elem = incident_elem.find('group_assignee')
+        if group_elem is not None:
+            name_elem = group_elem.find('name')
+            if name_elem is not None and name_elem.text:
+                ticket['group'] = name_elem.text.strip()
+        
+        # Extract custom fields for additional information
+        custom_fields_elem = incident_elem.find('custom_fields_values')
+        if custom_fields_elem is not None:
+            additional_info = []
+            for custom_field in custom_fields_elem.findall('custom_fields_value'):
+                name_elem = custom_field.find('name')
+                value_elem = custom_field.find('value')
+                if name_elem is not None and value_elem is not None:
+                    if name_elem.text and value_elem.text:
+                        additional_info.append(f"{name_elem.text.strip()}: {value_elem.text.strip()}")
+            if additional_info:
+                ticket['additional_info'] = '; '.join(additional_info)
+        
+        # Ensure required fields
+        if not ticket.get('id'):
+            ticket['id'] = f"INC-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+        
+        if not ticket.get('subject') and not ticket.get('description'):
+            return None  # Skip invalid incidents
+        
+        # Set default values for missing fields
+        if not ticket.get('priority'):
+            ticket['priority'] = 'Medium'
+        if not ticket.get('status'):
+            ticket['status'] = 'Open'
             
-            'web_mapping': """Thank you for contacting GIS Support regarding the web mapping issue. Based on your description, here are the recommended steps:
+        return ticket
 
-1. Clear your browser cache and cookies
-2. Try accessing the web map in an incognito/private browsing window
-3. Check if the issue occurs in a different browser
-4. Verify your network connection is stable
-
-If these steps don't resolve the issue, I'll need to check the server status and may need additional details about your specific use case.
-
-Best regards,
-GIS Support Team""",
-            
-            'data_issues': """Thank you for reporting the data issue. I understand this can be frustrating. Let me help you resolve this:
-
-1. Verify the data source path is correct and accessible
-2. Check if the data has been moved or renamed recently
-3. Ensure you have proper read permissions for the data location
-4. Try refreshing the data source in your project
-
-I'll also check our data server status and coordinate with the data management team if needed.
-
-Best regards,
-GIS Support Team""",
-            
-            'permissions': """Thank you for contacting us about the access issue. I'll help you resolve this permissions problem:
-
-1. Please verify your username and confirm you're using the correct login credentials
-2. Check if your account has been recently updated or if passwords have expired
-3. Clear your browser cache if accessing web-based GIS services
-
-I'm also checking with our system administrators to ensure your account has the proper permissions assigned. You should receive an update within 2 hours.
-
-Best regards,
-GIS Support Team""",
-            
-            'default': """Thank you for contacting GIS Support. I've received your request and will review it shortly.
-
-To help me provide the best assistance, could you please provide:
-1. Steps to reproduce the issue
-2. Any error messages you're seeing
-3. Which GIS software/application you're using
-4. When the issue first occurred
-
-I'll respond with a solution or next steps within 4 hours.
-
-Best regards,
-GIS Support Team"""
-        }
-
-    def categorize_ticket(self, ticket_content: str) -> str:
-        """Categorize ticket based on content analysis"""
-        content_lower = ticket_content.lower()
-        
-        for category, keywords in self.ticket_categories.items():
-            if any(keyword in content_lower for keyword in keywords):
-                return category
-        
-        return 'general'
-
-    def determine_priority(self, ticket_content: str) -> str:
-        """Determine ticket priority based on content"""
-        content_lower = ticket_content.lower()
-        
-        for priority, keywords in self.priority_keywords.items():
-            if any(keyword in content_lower for keyword in keywords):
-                return priority
-        
-        return 'medium'
-
-    def generate_response(self, category: str, ticket_content: str) -> str:
-        """Generate appropriate response based on ticket category"""
-        if category in self.response_templates:
-            return self.response_templates[category]
-        else:
-            return self.response_templates['default']
-
-    def analyze_ticket(self, ticket_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Analyze ticket and return categorization, priority, and suggested response"""
-        content = ticket_data.get('description', '') + ' ' + ticket_data.get('subject', '')
-        
-        category = self.categorize_ticket(content)
-        priority = self.determine_priority(content)
-        suggested_response = self.generate_response(category, content)
-        
-        return {
-            'category': category,
-            'priority': priority,
-            'suggested_response': suggested_response,
-            'analysis_timestamp': datetime.now().isoformat(),
-            'confidence': 0.85  # Placeholder confidence score
-        }
-
-# Initialize the AI agent
-gis_agent = GISTicketAgent()
+# Initialize the enhanced AI agent
+gis_agent = EnhancedGISTicketAgent()
 
 @app.route('/')
 def index():
@@ -345,5 +333,227 @@ def get_stats():
         }
     })
 
+@app.route('/api/process_tickets', methods=['POST'])
+def process_tickets():
+    """Process imported tickets with enhanced AI functionality"""
+    try:
+        data = request.json
+        tickets = data.get('tickets', [])
+        processing_options = data.get('processing_options', {})
+        
+        if not tickets:
+            return jsonify({'error': 'No tickets provided for processing'}), 400
+        
+        processed_tickets = []
+        start_time = datetime.now()
+        responses_generated = 0
+        action_plans_created = 0
+        
+        for ticket_data in tickets:
+            ticket = ticket_data.get('ticket_data', {})
+            existing_analysis = ticket_data.get('analysis', {})
+            
+            # Enhanced processing for each ticket
+            processing_result = {
+                'ticket_id': ticket.get('id'),
+                'original_analysis': existing_analysis,
+                'enhanced_analysis': {},
+                'response': '',
+                'action_plan': [],
+                'processing_timestamp': datetime.now().isoformat()
+            }
+            
+            # Re-analyze with enhanced context
+            if processing_options.get('categorize', True):
+                enhanced_analysis = gis_agent.analyze_ticket(ticket)
+                processing_result['enhanced_analysis'] = enhanced_analysis
+            
+            # Generate detailed response
+            if processing_options.get('generate_responses', True):
+                category = existing_analysis.get('category', 'general')
+                content = ticket.get('description', '') + ' ' + ticket.get('subject', '')
+                response = gis_agent.generate_response(category, content)
+                processing_result['response'] = response
+                responses_generated += 1
+            
+            # Create action plan
+            if processing_options.get('create_action_plan', True):
+                action_plan = create_action_plan(ticket, existing_analysis)
+                processing_result['action_plan'] = action_plan
+                action_plans_created += 1
+            
+            # Assign priority if requested
+            if processing_options.get('assign_priority', True):
+                content = ticket.get('description', '') + ' ' + ticket.get('subject', '')
+                priority = gis_agent.determine_priority(content)
+                processing_result['assigned_priority'] = priority
+            
+            processed_tickets.append(processing_result)
+        
+        end_time = datetime.now()
+        processing_time = (end_time - start_time).total_seconds() * 1000  # Convert to milliseconds
+        avg_processing_time = processing_time / len(tickets) if tickets else 0
+        
+        return jsonify({
+            'status': 'success',
+            'message': f'Successfully processed {len(tickets)} tickets',
+            'total_processed': len(tickets),
+            'processed_tickets': processed_tickets,
+            'responses_generated': responses_generated,
+            'action_plans_created': action_plans_created,
+            'total_processing_time_ms': processing_time,
+            'avg_processing_time': round(avg_processing_time, 2),
+            'processing_options': processing_options
+        })
+    
+    except Exception as e:
+        return jsonify({'error': f'Failed to process tickets: {str(e)}'}), 500
+
+@app.route('/api/prompts')
+def list_exported_prompts():
+    """List all exported prompt files"""
+    try:
+        prompts_dir = 'prompts_export'
+        if not os.path.exists(prompts_dir):
+            return jsonify({'status': 'success', 'prompts': []})
+        
+        prompt_files = []
+        for filename in os.listdir(prompts_dir):
+            if filename.endswith('_prompt.json'):
+                filepath = os.path.join(prompts_dir, filename)
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                
+                prompt_files.append({
+                    'filename': filename,
+                    'ticket_id': data['metadata']['ticket_id'],
+                    'timestamp': data['metadata']['timestamp'],
+                    'analysis_type': data['metadata']['analysis_type']
+                })
+        
+        prompt_files.sort(key=lambda x: x['timestamp'], reverse=True)
+        
+        return jsonify({
+            'status': 'success',
+            'prompts': prompt_files,
+            'total_count': len(prompt_files)
+        })
+    
+    except Exception as e:
+        return jsonify({'status': 'error', 'error': str(e)})
+
+@app.route('/api/prompts/<filename>')
+def get_prompt_file(filename):
+    """Get specific prompt file content"""
+    try:
+        filepath = os.path.join('prompts_export', filename)
+        if not os.path.exists(filepath):
+            return jsonify({'status': 'error', 'error': 'File not found'})
+        
+        with open(filepath, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        return jsonify({
+            'status': 'success',
+            'prompt_data': data
+        })
+    
+    except Exception as e:
+        return jsonify({'status': 'error', 'error': str(e)})
+
+def create_action_plan(ticket: Dict[str, Any], analysis: Dict[str, Any]) -> List[str]:
+    """Create an action plan based on ticket content and analysis"""
+    category = analysis.get('category', 'general')
+    priority = analysis.get('priority', 'medium')
+    
+    # Base action items
+    action_plan = [
+        "Acknowledge receipt of ticket",
+        "Review ticket details and requirements"
+    ]
+    
+    # Category-specific action items
+    if category == 'gis_data':
+        action_plan.extend([
+            "Verify data source and format requirements",
+            "Check geodatabase compatibility",
+            "Validate coordinate system and projections",
+            "Process geocoding request",
+            "Update enterprise geodatabase",
+            "Notify requester of completion"
+        ])
+    elif category == 'gis_application':
+        action_plan.extend([
+            "Review application requirements",
+            "Check map service URLs and data sources",
+            "Test application functionality",
+            "Update application configuration",
+            "Deploy changes to production",
+            "Provide user training if needed"
+        ])
+    elif category == 'service_request':
+        action_plan.extend([
+            "Assess project scope and requirements",
+            "Coordinate with stakeholders",
+            "Develop project timeline",
+            "Create detailed project plan",
+            "Begin project execution",
+            "Provide regular progress updates"
+        ])
+    elif category == 'arcgis_pro':
+        action_plan.extend([
+            "Reproduce the reported issue",
+            "Check system requirements and compatibility",
+            "Apply relevant software updates",
+            "Test with clean user profile",
+            "Escalate to vendor support if needed"
+        ])
+    elif category == 'web_mapping':
+        action_plan.extend([
+            "Check web map configuration",
+            "Verify map service status",
+            "Test in multiple browsers",
+            "Review user permissions",
+            "Apply necessary fixes"
+        ])
+    elif category == 'data_issues':
+        action_plan.extend([
+            "Investigate data source integrity",
+            "Check data permissions and access",
+            "Verify data format and structure",
+            "Repair or restore data if needed",
+            "Update data documentation"
+        ])
+    elif category == 'permissions':
+        action_plan.extend([
+            "Verify user account status",
+            "Check group memberships and roles",
+            "Review permission settings",
+            "Update user access as needed",
+            "Test access restoration"
+        ])
+    else:
+        action_plan.extend([
+            "Investigate reported issue",
+            "Research potential solutions",
+            "Implement appropriate fix",
+            "Test resolution",
+            "Follow up with requester"
+        ])
+    
+    # Priority-based timeline adjustments
+    if priority == 'high':
+        action_plan.append("URGENT: Complete within 4 hours")
+    elif priority == 'medium':
+        action_plan.append("Standard: Complete within 24 hours")
+    else:
+        action_plan.append("Low priority: Complete within 72 hours")
+    
+    return action_plan
+
+# Flask server startup
 if __name__ == '__main__':
+    print("Starting GIS Ticket Management AI Agent...")
+    print("Server will be available at: http://127.0.0.1:5000")
+    print("Press Ctrl+C to stop the server")
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -24,9 +24,35 @@ The Workflow AI Agent is designed to enhance daily productivity by automating re
    ```
    cd workflow-ai-agent
    ```
-3. Install the required dependencies:
+3. Install conda (if not installed)
    ```
-   pip install -r requirements.txt
+   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+   ```
+   Now run the installer:
+   ```
+   bash miniconda.sh -b -p $HOME/miniconda3
+   ```
+   Initialize conda for your shell:
+   ```
+   $HOME/miniconda3/bin/conda init bash
+   ```
+   Now source the conda configuration and verify the installation:
+   ```
+   source ~/.bashrc && conda --version
+   ```
+   Clean up the installer file:
+   ```
+   rm miniconda.sh
+   Restart your terminal or run source ~/.bashrc to ensure conda is fully available
+   ```
+
+4. Install the required dependencies:
+   ```
+   conda create -n .condaenv python=3.9 (create a new environment)
+   conda activate .condaenv (activate an environment)
+   conda install requirements.txt
+   conda list (list installed packages)
+   
    ```
 
 ### Running the Application
