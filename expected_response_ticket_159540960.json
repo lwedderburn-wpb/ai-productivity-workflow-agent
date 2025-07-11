@@ -1,0 +1,34 @@
+{
+  "category": "web_mapping",
+  "priority": "medium",
+  "confidence": 0.90,
+  "suggested_response": "Thank you for reporting the issue with the water as-built polygon fill in the Water Distribution GIS viewer. I understand that the whitish fill inside the pending as-built polygons is obscuring the underlying features, which is affecting your ability to view what's behind the polygon.\n\nThis is a symbology and layer styling issue that can be resolved by adjusting the polygon fill properties. Here's how to address this:\n\n1. **Access Layer Properties**: Open the Water Distribution GIS viewer and locate the pending as-built polygons layer in the layer list.\n\n2. **Modify Fill Symbology**: \n   - Right-click on the layer and select 'Properties' or 'Symbology'\n   - Navigate to the symbology settings for the pending as-built polygons\n   - Change the fill from solid color to 'No Fill' or set transparency to 100%\n   - Keep the outline/border visible with the red color for identification\n\n3. **Alternative Solutions**:\n   - Set fill transparency to 80-90% instead of removing completely\n   - Use a hatched or patterned fill instead of solid\n   - Apply a hollow symbol with just the red outline\n\n4. **Test the Changes**: Verify that underlying features are now visible while the red outline still clearly identifies pending as-built areas.\n\n5. **Apply Changes**: Save the layer symbology and refresh the web viewer to apply changes for all users.\n\nThis modification will maintain the visual identification of pending as-built polygons while allowing you to see the underlying water infrastructure features clearly.",
+  "action_plan": [
+    "Access the Water Distribution GIS viewer layer properties",
+    "Locate the pending as-built polygons layer symbology settings",
+    "Modify fill properties to remove or reduce opacity of whitish fill",
+    "Maintain red outline for visual identification of pending areas",
+    "Test changes to ensure underlying features are visible",
+    "Apply and save symbology changes",
+    "Refresh web viewer and notify requester of completion",
+    "Document the change for future reference"
+  ],
+  "estimated_resolution_time": "2-4 hours",
+  "required_skills": [
+    "ArcGIS Online/Portal administration",
+    "Web map symbology configuration", 
+    "Layer property management",
+    "Web viewer troubleshooting"
+  ],
+  "technical_details": {
+    "issue_type": "Symbology/Display",
+    "affected_system": "Water Distribution GIS Viewer",
+    "layer_affected": "Pending As-Built Polygons",
+    "solution_type": "Layer styling modification"
+  },
+  "follow_up_actions": [
+    "Confirm with requester that change meets needs",
+    "Check if similar styling issues exist in other layers",
+    "Update documentation for layer styling standards"
+  ]
+}

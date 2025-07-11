@@ -145,6 +145,29 @@
             background: #5a6268;
         }
 
+        .btn-clear {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-clear:hover {
+            background: #c82333;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+        }
+
         .result {
             margin-top: 20px;
             padding: 15px;
@@ -269,6 +292,11 @@
         <div class="header">
             <h1>GIS Ticket Management AI Agent</h1>
             <p>Automate your daily workflow and boost productivity</p>
+            <div style="margin-top: 15px;">
+                <button onclick="clearAllForms()" class="btn-clear" style="background: #6c757d; padding: 10px 20px; font-size: 16px;">
+                    🗑️ Clear All Forms
+                </button>
+            </div>
         </div>
 
         <div class="dashboard">
@@ -311,7 +339,10 @@
                         <label for="ticket-description">Description</label>
                         <textarea id="ticket-description" name="ticket-description" placeholder="Detailed description of the issue..."></textarea>
                     </div>
-                    <button type="submit" class="btn">Analyze Ticket</button>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn">Analyze Ticket</button>
+                        <button type="button" class="btn-clear" onclick="clearSingleTicketForm()">🗑️ Clear</button>
+                    </div>
                 </form>
                 <div id="single-result"></div>
             </div>
@@ -325,7 +356,10 @@
                         <label for="xml-file">XML File</label>
                         <input type="file" id="xml-file" name="xml-file" accept=".xml" required>
                     </div>
-                    <button type="submit" class="btn">Import XML Tickets</button>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn">Import XML Tickets</button>
+                        <button type="button" class="btn-clear" onclick="clearXmlImportForm()">🗑️ Clear</button>
+                    </div>
                 </form>
                 <div id="xml-import-result"></div>
             </div>
@@ -338,7 +372,10 @@
                     <label for="bulk-tickets">Tickets (JSON format)</label>
                     <textarea id="bulk-tickets" name="bulk-tickets" placeholder='[{"id": "TICKET-001", "subject": "GIS Issue", "description": "Description here"}, ...]'></textarea>
                 </div>
-                <button onclick="processBulkTickets()" class="btn">Process Bulk Tickets</button>
+                <div class="form-buttons">
+                    <button onclick="processBulkTickets()" class="btn">Process Bulk Tickets</button>
+                    <button type="button" class="btn-clear" onclick="clearBulkTicketsForm()">🗑️ Clear</button>
+                </div>
                 <div id="bulk-result"></div>
             </div>
 
@@ -362,7 +399,10 @@
                         <label for="response-content">Ticket Content</label>
                         <textarea id="response-content" name="response-content" placeholder="Paste the ticket content here..."></textarea>
                     </div>
-                    <button type="submit" class="btn">Generate Response</button>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn">Generate Response</button>
+                        <button type="button" class="btn-clear" onclick="clearResponseForm()">🗑️ Clear</button>
+                    </div>
                 </form>
                 <div id="response-result"></div>
             </div>
@@ -371,7 +411,10 @@
             <div class="card">
                 <h3>🤖 AI Prompt Exports</h3>
                 <p>View exported prompts for manual AI model usage</p>
-                <button onclick="loadExportedPrompts()" class="btn">📄 View Exported Prompts</button>
+                <div class="form-buttons">
+                    <button onclick="loadExportedPrompts()" class="btn">📄 View Exported Prompts</button>
+                    <button type="button" class="btn-clear" onclick="clearPromptsResults()">🗑️ Clear Results</button>
+                </div>
                 <div id="prompts-result"></div>
             </div>
         </div>
@@ -652,6 +695,7 @@
                         
                         // Create a modal-like display
                         const modal = document.createElement('div');
+                        modal.className = 'prompt-modal';
                         modal.style.cssText = `
                             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
                             background: rgba(0,0,0,0.7); z-index: 1000; 
@@ -792,6 +836,65 @@
                 processBtn.disabled = false;
                 processBtn.textContent = '🚀 Begin AI Processing';
             });
+        }
+
+        // Clear form functions
+        function clearSingleTicketForm() {
+            document.getElementById('ticket-id').value = '';
+            document.getElementById('ticket-subject').value = '';
+            document.getElementById('ticket-description').value = '';
+            document.getElementById('single-result').innerHTML = '';
+            console.log('Single ticket form cleared');
+        }
+
+        function clearXmlImportForm() {
+            document.getElementById('xml-file').value = '';
+            document.getElementById('xml-import-result').innerHTML = '';
+            // Clear any stored imported tickets
+            window.importedTickets = [];
+            console.log('XML import form cleared');
+        }
+
+        function clearBulkTicketsForm() {
+            document.getElementById('bulk-tickets').value = '';
+            document.getElementById('bulk-result').innerHTML = '';
+            console.log('Bulk tickets form cleared');
+        }
+
+        function clearResponseForm() {
+            document.getElementById('response-category').value = 'general';
+            document.getElementById('response-content').value = '';
+            document.getElementById('response-result').innerHTML = '';
+            console.log('Response form cleared');
+        }
+
+        function clearPromptsResults() {
+            // Clear the results div
+            document.getElementById('prompts-result').innerHTML = '';
+            
+            // Close any open prompt modal dialogs
+            const promptModals = document.querySelectorAll('.prompt-modal');
+            promptModals.forEach(modal => modal.remove());
+            
+            // Fallback: also check for any remaining modals with specific styling
+            const fixedModals = document.querySelectorAll('div[style*="position: fixed"]');
+            fixedModals.forEach(modal => {
+                if (modal.innerHTML && (modal.innerHTML.includes('AI Prompt for Ticket') || modal.innerHTML.includes('🤖'))) {
+                    modal.remove();
+                }
+            });
+            
+            console.log('Prompts results and modals cleared');
+        }
+
+        // Clear all forms function (bonus feature)
+        function clearAllForms() {
+            clearSingleTicketForm();
+            clearXmlImportForm();
+            clearBulkTicketsForm();
+            clearResponseForm();
+            clearPromptsResults();
+            console.log('All forms cleared');
         }
     </script>
 </body>
