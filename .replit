@@ -2,7 +2,7 @@ modules = ["python-3.12"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["glibcLocales", "gh", "run", "tecoc", "vim", "psmisc", "lsof"]
+packages = ["glibcLocales"]
 
 [workflows]
 runButton = "Run GIS AI Agent"
