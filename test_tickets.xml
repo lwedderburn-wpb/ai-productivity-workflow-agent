@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents>
+  <incident>
+    <id>INC-2025-001</id>
+    <number>45001</number>
+    <subject>ArcGIS Server map service performance issues</subject>
+    <description>Map services on our ArcGIS Server are responding very slowly. Load times have increased from 2 seconds to over 30 seconds. This affects all web applications and dashboards. Performance degradation started after last weekend's server maintenance.</description>
+    <priority>High</priority>
+    <status>Open</status>
+    <created_date>2025-07-11T08:30:00-04:00</created_date>
+    <updated_date>2025-07-11T09:15:00-04:00</updated_date>
+    <due_date>2025-07-11T17:00:00-04:00</due_date>
+    <requester>Sarah Johnson</requester>
+    <requester_email>sjohnson@organization.com</requester_email>
+    <assigned_to>GIS Support Team</assigned_to>
+    <assigned_to_email>gis-support@organization.com</assigned_to_email>
+    <category>web_mapping</category>
+    <subcategory>Server Performance</subcategory>
+    <group>Infrastructure</group>
+    <additional_info>Server specs: Windows Server 2019, 32GB RAM, ArcGIS Server 10.9.1. Multiple map services affected including BaseMaps, UtilityNetwork, and ParcelData services.</additional_info>
+  </incident>
+  
+  <incident>
+    <id>INC-2025-002</id>
+    <number>45002</number>
+    <subject>Collector app GPS accuracy problems</subject>
+    <description>Field teams report GPS accuracy issues in Collector app. Point features are being collected with 10-15 meter horizontal accuracy instead of the usual 1-3 meters. This affects asset inventory quality and compliance requirements.</description>
+    <priority>Medium</priority>
+    <status>Assigned</status>
+    <created_date>2025-07-10T14:20:00-04:00</created_date>
+    <updated_date>2025-07-11T07:45:00-04:00</updated_date>
+    <due_date>2025-07-12T16:00:00-04:00</due_date>
+    <requester>Mike Rodriguez</requester>
+    <requester_email>mrodriguez@organization.com</requester_email>
+    <assigned_to>Mobile GIS Specialist</assigned_to>
+    <assigned_to_email>mobile-gis@organization.com</assigned_to_email>
+    <category>mobile</category>
+    <subcategory>GPS Accuracy</subcategory>
+    <group>Field Operations</group>
+    <additional_info>Affects both Android and iOS devices. Issue started appearing 3 days ago. Using internal GPS, no external receivers. Collector version 21.1.2 on all devices.</additional_info>
+  </incident>
+  
+  <incident>
+    <id>INC-2025-003</id>
+    <number>45003</number>
+    <subject>Portal authentication with Active Directory failing</subject>
+    <description>Users cannot log into Portal for ArcGIS using their Active Directory credentials. Login page loads but authentication fails with generic error message. LDAP connection appears to be the issue. All 150 organization users affected.</description>
+    <priority>High</priority>
+    <status>In Progress</status>
+    <created_date>2025-07-11T06:00:00-04:00</created_date>
+    <updated_date>2025-07-11T10:30:00-04:00</updated_date>
+    <due_date>2025-07-11T14:00:00-04:00</due_date>
+    <requester>IT Administrator</requester>
+    <requester_email>itadmin@organization.com</requester_email>
+    <assigned_to>System Administrator</assigned_to>
+    <assigned_to_email>sysadmin@organization.com</assigned_to_email>
+    <category>permissions</category>
+    <subcategory>Authentication</subcategory>
+    <group>Security</group>
+    <additional_info>Portal for ArcGIS 10.9, Windows Server 2019, Active Directory 2016. Error logs show LDAP bind failures. Network connectivity to domain controller verified.</additional_info>
+  </incident>
+  
+  <incident>
+    <id>INC-2025-004</id>
+    <number>45004</number>
+    <subject>Training request: Python scripting for geoprocessing</subject>
+    <description>Development team requesting training on Python scripting for automating geoprocessing workflows. Team has basic Python knowledge but needs ArcPy specific training. Looking for 2-day workshop for 8 developers.</description>
+    <priority>Low</priority>
+    <status>Planning</status>
+    <created_date>2025-07-09T11:15:00-04:00</created_date>
+    <updated_date>2025-07-10T16:20:00-04:00</updated_date>
+    <due_date>2025-07-25T17:00:00-04:00</due_date>
+    <requester>Development Manager</requester>
+    <requester_email>devmanager@organization.com</requester_email>
+    <assigned_to>Training Coordinator</assigned_to>
+    <assigned_to_email>training@organization.com</assigned_to_email>
+    <category>general</category>
+    <subcategory>Training</subcategory>
+    <group>Professional Development</group>
+    <additional_info>Team familiar with general Python, basic GIS concepts. Need focus on ArcPy, ModelBuilder integration, and batch processing techniques. Prefer hands-on workshop format.</additional_info>
+  </incident>
+  
+  <incident>
+    <id>INC-2025-005</id>
+    <number>45005</number>
+    <subject>Geodatabase versioning and reconcile errors</subject>
+    <description>Enterprise geodatabase experiencing conflicts during version reconciliation. Multiple edit sessions creating locks that prevent successful reconcile and post operations. Data integrity concerns with edit conflicts not resolving properly.</description>
+    <priority>High</priority>
+    <status>Open</status>
+    <created_date>2025-07-11T09:45:00-04:00</created_date>
+    <updated_date>2025-07-11T11:00:00-04:00</updated_date>
+    <due_date>2025-07-11T18:00:00-04:00</due_date>
+    <requester>Database Administrator</requester>
+    <requester_email>dba@organization.com</requester_email>
+    <assigned_to>Senior GIS Analyst</assigned_to>
+    <assigned_to_email>senior-analyst@organization.com</assigned_to_email>
+    <category>data_issues</category>
+    <subcategory>Versioning</subcategory>
+    <group>Data Management</group>
+    <additional_info>SQL Server 2019 enterprise geodatabase, ArcGIS Server 10.9.1. Multiple concurrent editors, version tree has 15 active child versions. Compress operation failing.</additional_info>
+  </incident>
+</incidents>

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "TICKET-001",
+    "subject": "ArcGIS Pro crashes when opening large geodatabase",
+    "description": "When I try to open our 5GB enterprise geodatabase in ArcGIS Pro 3.1, the application crashes immediately. This is blocking our daily mapping workflow and we cannot complete our projects. Error message mentions memory allocation failure. We need this resolved urgently as our team of 10 users cannot work."
+  },
+  {
+    "id": "TICKET-002", 
+    "subject": "Cannot print large format maps from ArcGIS Pro",
+    "description": "We're trying to print 36x48 inch maps from ArcGIS Pro to our HP DesignJet plotter. The print job starts but fails halfway through with a 'memory exceeded' error. We've tried different print settings and page sizes but nothing works. Maps are for a client presentation tomorrow."
+  },
+  {
+    "id": "TICKET-003",
+    "subject": "How to create a web map dashboard",
+    "description": "Hi, I'm new to ArcGIS Online and would like to learn how to create a dashboard that shows real-time data from our field sensors. Can you provide some training materials or documentation? This is not urgent, just for learning purposes."
+  },
+  {
+    "id": "TICKET-004",
+    "subject": "Shapefile attribute data appears corrupted",
+    "description": "Our roads shapefile suddenly shows null values in the 'Speed_Limit' field for about 500 features. The data was fine yesterday but today these values are missing. We suspect data corruption. This affects our traffic analysis and needs immediate attention."
+  },
+  {
+    "id": "TICKET-005",
+    "subject": "Survey123 form not syncing to ArcGIS Online",
+    "description": "Field crew using Survey123 on tablets cannot sync their collected data back to our ArcGIS Online organization. Forms complete successfully but sync fails with 'authentication error'. 15 crew members affected, blocking daily field operations."
+  },
+  {
+    "id": "TICKET-006",
+    "subject": "Permission denied accessing shared web map",
+    "description": "Several users report they cannot access the 'Emergency Response' web map that was shared with our organization last week. They get 'Permission Denied' error when clicking the link. Users have correct roles and licenses assigned."
+  },
+  {
+    "id": "TICKET-007",
+    "subject": "Geocoding batch addresses failing",
+    "description": "Our weekly batch geocoding job that processes 10,000 customer addresses is failing. Only about 30% of addresses are successfully geocoded, much lower than our usual 95% success rate. Using Esri World Geocoding Service. Need to investigate what changed."
+  },
+  {
+    "id": "TICKET-008",
+    "subject": "Feature request: Dark mode for ArcGIS Online",
+    "description": "Would it be possible to add a dark mode theme to ArcGIS Online? Many of our users work in low-light environments and would benefit from a darker interface. This would be a nice enhancement for user experience."
+  },
+  {
+    "id": "TICKET-009",
+    "subject": "Web AppBuilder widget not loading",
+    "description": "Custom widget in our Web AppBuilder application stopped working after the latest update. Console shows JavaScript errors. Widget was working fine before and no changes were made to the code. Users cannot access critical filtering functionality."
+  },
+  {
+    "id": "TICKET-010",
+    "subject": "Workflow Manager database connection issues",
+    "description": "Cannot connect to Workflow Manager database. Connection worked yesterday but today all users get 'database unavailable' error. This is preventing job assignment and tracking for our entire GIS production workflow."
+  }
+]

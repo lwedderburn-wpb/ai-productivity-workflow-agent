@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://cityofwestpalmbeach.samanage.com/incidents?report_id=9636591&applied=true&assigned_to%5B%5D=12669266&state%5B%5D=1095264%2C1095265%2C1095266%2C1095268%2C1164101%2C1164102&sort_by=state&sort_order=ASC&data=state&columns=number%2Cassigned_to%2Cstate%2Ctitle%2Cpriority%2Cdepartment%2Csub_type%2Crequester%2Csite%2Corigin%2Cpreview%2Cslm
+HostUrl=https://cityofwestpalmbeach.samanage.com/incidents.xml?applied=true&assigned_to%5B%5D=12669266&columns=number%2Cassigned_to%2Cstate%2Ctitle%2Cpriority%2Cdepartment%2Csub_type%2Crequester%2Csite%2Corigin%2Cpreview%2Cslm&data=state&report_id=9636591&sort_by=state&sort_order=ASC&state%5B%5D=1095264%2C1095265%2C1095266%2C1095268%2C1164101%2C1164102&export=true&per_page=all&format=xml

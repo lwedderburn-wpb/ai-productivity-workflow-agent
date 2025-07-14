@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents>
+  <incident>
+    <id>160044672</id>
+    <number>31796</number>
+    <name>GIS Support - Update to the Zoning and Land Development Regulations (Encode</name>
+    <description> Please update Sections 94-106, 94-124 and 94-611 of the Zoning and Land Development Regulations (Encode) to reflect the changes approved through Ordinances 5132-25 and 5134-25. </description>
+    <description_no_html>Please update Sections 94-106, 94-124 and 94-611 of the Zoning and Land Development Regulations (Encode) to reflect the changes approved through Ordinances 5132-25 and 5134-25.</description_no_html>
+    <state>In progress</state>
+    <priority>Medium</priority>
+    <category>
+      <id>2218350</id>
+      <name>SR_GIS</name>
+      <default_tags>Service Request</default_tags>
+      <parent_id nil="true"/>
+      <deleted>false</deleted>
+      <default_assignee_id>-1</default_assignee_id>
+    </category>
+    <subcategory>
+      <id>2497056</id>
+      <name>'SR_' Access / Change Request </name>
+      <default_tags></default_tags>
+      <parent_id>2218350</parent_id>
+      <deleted>false</deleted>
+      <default_assignee_id>-1</default_assignee_id>
+    </subcategory>
+    <assignee>
+      <group_id>12669266</group_id>
+      <is_user>true</is_user>
+      <id>11344229</id>
+      <name>Leighton Wedderburn</name>
+      <email>lwedderburn@wpb.org</email>
+      <avatar>
+        <type>initials</type>
+        <initials>LW</initials>
+        <color>var(--colors-foreground-7-600)</color>
+      </avatar>
+      <reports_to>
+        <group_id>10178933</group_id>
+        <is_user>true</is_user>
+        <id>9402438</id>
+        <name>James Judge</name>
+        <email>JJudge@wpb.org</email>
+        <avatar>
+          <type>initials</type>
+          <initials>JJ</initials>
+          <color>var(--colors-foreground-7-700)</color>
+        </avatar>
+      </reports_to>
+    </assignee>
+    <requester>
+      <id>10321746</id>
+      <account_id>87667</account_id>
+      <user_id>9421905</user_id>
+      <email>AHansen@wpb.org</email>
+      <name>Alex Hansen</name>
+      <disabled>false</disabled>
+      <has_gravatar>false</has_gravatar>
+      <customer_satisfaction_survey_time>2025-07-11T11:55:09-04:00</customer_satisfaction_survey_time>
+      <avatar>
+        <type>initials</type>
+        <initials>AH</initials>
+        <color>var(--colors-foreground-7-200)</color>
+      </avatar>
+    </requester>
+    <created_at>2025-07-10T14:50:07-04:00</created_at>
+    <updated_at>2025-07-11T10:07:22-04:00</updated_at>
+    <due_at>2025-07-16T00:00:00-04:00</due_at>
+    <sla_violations/>
+    <number_of_comments>0</number_of_comments>
+    <user_saw_all_comments>true</user_saw_all_comments>
+    <is_service_request>false</is_service_request>
+    <created_by>
+      <id>10321746</id>
+      <account_id>87667</account_id>
+      <user_id>9421905</user_id>
+      <email>AHansen@wpb.org</email>
+      <name>Alex Hansen</name>
+      <disabled>false</disabled>
+      <has_gravatar>false</has_gravatar>
+      <customer_satisfaction_survey_time>2025-07-11T11:55:09-04:00</customer_satisfaction_survey_time>
+      <avatar>
+        <type>initials</type>
+        <initials>AH</initials>
+        <color>var(--colors-foreground-7-200)</color>
+      </avatar>
+    </created_by>
+    <resolved_by nil="true"/>
+    <resolution_description nil="true"/>
+    <resolution_code nil="true"/>
+    <group_assignee>
+      <id>8738388</id>
+      <name>GIS</name>
+      <description></description>
+      <disabled>false</disabled>
+      <is_user>false</is_user>
+      <reports_to>
+        <id>-1</id>
+        <avatar nil="true"/>
+        <name nil="true"/>
+        <href>https://cityofwestpalmbeach.samanage.com/groups/-1.xml</href>
+      </reports_to>
+      <avatar>
+        <type>group</type>
+        <color>var(--colors-foreground-7-500)</color>
+        <klass>RealGroup</klass>
+      </avatar>
+      <type>RealGroup</type>
+      <send_notifications>true</send_notifications>
+      <custom_fields_values/>
+      <memberships>
+        <membership>
+          <id>11213210</id>
+          <type>User</type>
+          <user>Diana Alvarez</user>
+        </membership>
+      </memberships>
+    </group_assignee>
+    <customer_satisfaction_survey_sent_at nil="true"/>
+    <customer_satisfaction_survey_completed_at nil="true"/>
+    <custom>2025-07-10 18:50:08.498724</custom>
+    <href>https://cityofwestpalmbeach.samanage.com/incidents/160044672-gis-support-update-to-the-zoning-and-land-development-regulations-encode.xml</href>
+    <href_account_domain>https://cityofwestpalmbeach.samanage.com/incidents/160044672-gis-support-update-to-the-zoning-and-land-development-regulations-encode</href_account_domain>
+    <site>
+      <id>205261</id>
+      <name>CityHall</name>
+      <location>CityHall</location>
+      <description></description>
+      <time_zone>Eastern Time (US &amp; Canada)</time_zone>
+      <language>-1</language>
+      <business_record nil="true"/>
+    </site>
+    <department>
+      <id>325525</id>
+      <name>Development Services</name>
+      <description></description>
+      <default_assignee_id nil="true"/>
+    </department>
+    <cc>
+      <cc>Sisira Lenagala &lt;slenagala@wpb.org&gt;</cc>
+      <cc>James Judge &lt;JJudge@wpb.org&gt;</cc>
+    </cc>
+    <custom_fields_values/>
+    <origin>external</origin>
+    <comments/>
+    <attachments>
+      <attachment>
+        <id>250549102</id>
+        <content_type>application/pdf</content_type>
+        <size>277170</size>
+        <filename>Ordinance No. 5134-25 (NORA Height &amp; Stories).pdf</filename>
+        <url>https://s3.us-east-1.amazonaws.com/production.main.customer.data/attachments/ea6f3ec2bf34d817680a/Ordinance%20No.%205134-25%20%28NORA%20Height%20%26%20Stories%29.pdf?versionId=IvOn5GuIIrbm.W.X1qg.wJkhzf53HJGE&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAREFPCQSX36KL3J6M%2F20250711%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20250711T210945Z&amp;X-Amz-Expires=600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=37e16760c597d5dfe4c60b3c7d1447a9b424efc85df1a8b02fa1cbc0224e27a6</url>
+        <shared_attachment>false</shared_attachment>
+        <attachable_id>160044672</attachable_id>
+        <attachable_type>Incident</attachable_type>
+        <attachment_type>attachment</attachment_type>
+        <thumb_url>/attachments/ea6f3ec2bf34d817680a/ordinance-no-5134-25-nora-height-stories.pdf?thumb=true</thumb_url>
+        <secure_url>/attachments/ea6f3ec2bf34d817680a/ordinance-no-5134-25-nora-height-stories.pdf</secure_url>
+        <link_uuid_url>/attachments/ea6f3ec2bf34d817680a</link_uuid_url>
+        <uuid>ea6f3ec2bf34d817680a</uuid>
+      </attachment>
+      <attachment>
+        <id>250549136</id>
+        <content_type>application/pdf</content_type>
+        <size>222982</size>
+        <filename>Ordinance No. 5132-25 [Hospital].pdf</filename>
+        <url>https://s3.us-east-1.amazonaws.com/production.main.customer.data/attachments/b3930087ea67a865f689/Ordinance%20No.%205132-25%20%5BHospital%5D.pdf?versionId=rkvz8DTF237Uo71wyx.CA1Ix5HCTV8z5&amp;X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAREFPCQSX36KL3J6M%2F20250711%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20250711T210945Z&amp;X-Amz-Expires=600&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=f6dd7b3d4d0ca609fb6f2b19432270def4911cb2ddf1336385dc0c9d01e3fc36</url>
+        <shared_attachment>false</shared_attachment>
+        <attachable_id>160044672</attachable_id>
+        <attachable_type>Incident</attachable_type>
+        <attachment_type>attachment</attachment_type>
+        <thumb_url>/attachments/b3930087ea67a865f689/ordinance-no-5132-25-hospital.pdf?thumb=true</thumb_url>
+        <secure_url>/attachments/b3930087ea67a865f689/ordinance-no-5132-25-hospital.pdf</secure_url>
+        <link_uuid_url>/attachments/b3930087ea67a865f689</link_uuid_url>
+        <uuid>b3930087ea67a865f689</uuid>
+      </attachment>
+    </attachments>
+    <statistics>
+      <statistic>
+        <statistic_type>last_state_change</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-07-11T10:07:22-04:00","history":[{"id":1095264,"title":"","startTime":"2025-07-10T14:50:07.000-04:00","endTime":"2025-07-10T18:50:08.973+00:00","timeSpent":2,"timeSpentBH":0,"timeSinceCreation":0,"timeSinceCreationBH":0,"isCurrent":false,"isDeleted":false},{"id":1095265,"title":"","startTime":"2025-07-10T18:50:09.000+00:00","endTime":"2025-07-10T19:46:41.528+00:00","timeSpent":3393,"timeSpentBH":3393,"timeSinceCreation":2,"timeSinceCreationBH":2,"isCurrent":false,"isDeleted":false},{"id":1095266,"title":"","startTime":"2025-07-10T15:46:41.000-04:00","endTime":"2025-07-11T14:07:22.408+00:00","timeSpent":66041,"timeSpentBH":15641,"timeSinceCreation":3394,"timeSinceCreationBH":3394,"isCurrent":false,"isDeleted":false}],"summary":{"1095264":2.052290128,"1095265":3392.621504795,"1095266":66041.473193725},"bh_summary":{"1095264":0,"1095265":3393,"1095266":15641}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>State Changed</statistic_type>
+        <time>00:00</time>
+        <time_elapsed>00:00</time_elapsed>
+        <business_time_elapsed>00:00</business_time_elapsed>
+        <value>2025-07-10 18:50:07 UTC</value>
+      </statistic>
+      <statistic>
+        <statistic_type>reassignments</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>3</value>
+      </statistic>
+      <statistic>
+        <statistic_type>last_reassigned</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-07-10T18:10:06-04:00","history":[{"id":8738393,"title":"City Hall Queue","startTime":"2025-07-10T18:50:08.000+00:00","endTime":"2025-07-10T19:46:41.451+00:00","timeSpent":3393,"timeSpentBH":3393,"timeSinceCreation":1,"timeSinceCreationBH":1,"isCurrent":false,"isDeleted":false},{"id":10178933,"title":"James Judge","startTime":"2025-07-10T15:46:41.000-04:00","endTime":"2025-07-10T22:10:06.074+00:00","timeSpent":8605,"timeSpentBH":4399,"timeSinceCreation":3394,"timeSinceCreationBH":3394,"isCurrent":false,"isDeleted":false}],"summary":{"8738393":3393.525905606,"10178933":8605.197167437},"bh_summary":{"8738393":3393,"10178933":4399}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>to_assignment</statistic_type>
+        <time>00:57</time>
+        <time_elapsed>00:57</time_elapsed>
+        <business_time_elapsed>00:57</business_time_elapsed>
+        <value>2025-07-10 19:46:41 UTC</value>
+      </statistic>
+      <statistic>
+        <statistic_type>assignee_opened_show</statistic_type>
+        <time>03:16</time>
+        <time_elapsed>03:16</time_elapsed>
+        <business_time_elapsed>02:10</business_time_elapsed>
+        <value>10178933</value>
+      </statistic>
+      <statistic>
+        <statistic_type>last_group_reassigned</statistic_type>
+        <time nil="true"/>
+        <time_elapsed nil="true"/>
+        <business_time_elapsed nil="true"/>
+        <value>{"last_updated":"2025-07-10T18:05:56-04:00","history":[],"summary":{}}</value>
+      </statistic>
+      <statistic>
+        <statistic_type>assignee_opened_show</statistic_type>
+        <time>18:43</time>
+        <time_elapsed>18:43</time_elapsed>
+        <business_time_elapsed>04:43</business_time_elapsed>
+        <value>12669266</value>
+      </statistic>
+    </statistics>
+    <tags>
+      <tag>
+        <name>Service Request</name>
+      </tag>
+      <tag>
+        <name>Development Services</name>
+      </tag>
+    </tags>
+    <incidents/>
+    <changes/>
+    <solutions/>
+    <associated_sla_names/>
+    <is_customer_satisfied nil="true"/>
+    <customer_satisfaction_response nil="true"/>
+    <total_time_spent>0</total_time_spent>
+    <resolution nil="true"/>
+    <resolution_type nil="true"/>
+    <tasks/>
+    <time_tracks/>
+    <assets/>
+    <mobiles/>
+    <other_assets/>
+    <configuration_items/>
+    <discovery_hardwares/>
+    <purchase_orders/>
+    <releases/>
+    <problems/>
+    <request_variables/>
+    <cc_groups>
+      <cc_group>
+        <id>10178933</id>
+        <name>James Judge</name>
+        <email>JJudge@wpb.org</email>
+        <disabled>false</disabled>
+        <is_user>true</is_user>
+        <user_id>9402438</user_id>
+        <reports_to>
+          <id>9552923</id>
+          <avatar>
+            <type>initials</type>
+            <initials>MT</initials>
+            <color>var(--colors-foreground-7-700)</color>
+            <klass>UserGroup</klass>
+          </avatar>
+          <name>Miguel Gamino Telles</name>
+          <href>https://cityofwestpalmbeach.samanage.com/groups/9552923.xml</href>
+        </reports_to>
+        <avatar>
+          <type>initials</type>
+          <initials>JJ</initials>
+          <color>var(--colors-foreground-7-700)</color>
+          <klass>UserGroup</klass>
+        </avatar>
+        <type>UserGroup</type>
+        <send_notifications>true</send_notifications>
+        <custom_fields_values/>
+      </cc_group>
+      <cc_group>
+        <id>10201447</id>
+        <name>Sisira Lenagala</name>
+        <email>slenagala@wpb.org</email>
+        <disabled>false</disabled>
+        <is_user>true</is_user>
+        <user_id>9422478</user_id>
+        <reports_to>
+          <id>-1</id>
+          <avatar nil="true"/>
+          <name nil="true"/>
+          <href>https://cityofwestpalmbeach.samanage.com/groups/-1.xml</href>
+        </reports_to>
+        <avatar>
+          <type>initials</type>
+          <initials>SL</initials>
+          <color>var(--colors-foreground-7-700)</color>
+          <klass>UserGroup</klass>
+        </avatar>
+        <type>UserGroup</type>
+        <send_notifications>true</send_notifications>
+        <custom_fields_values/>
+      </cc_group>
+    </cc_groups>
+  </incident>
+  <page>1</page>
+  <per_page>1000000000</per_page>
+  <total_entries>1</total_entries>
+</incidents>
