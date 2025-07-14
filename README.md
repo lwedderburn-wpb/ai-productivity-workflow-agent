@@ -59,6 +59,10 @@ The Workflow AI Agent is designed to enhance daily productivity by automating re
 To start the application, run the following command:
 ```
 python src/app.py
+
+or 
+# Full path with interpriter env
+home/user-name/miniconda3/envs/ai-productivity/bin/python /home/{user-name}/project/AI_Produtivity/ai-productivity-workflow-agent/src/app.py
 ```
 
 ## Usage

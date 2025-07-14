@@ -486,7 +486,7 @@
                         const ticket = result.ticket_data;
                         resultsHtml += `
                             <div class="ticket-summary" data-ticket-id="${ticket.id}">
-                                <h5>Ticket: ${ticket.id}</h5>
+                                <h5>Ticket: ${ticket.number || ticket.id}</h5>
                                 <p><strong>Subject:</strong> ${ticket.subject || 'N/A'}</p>
                                 <p><strong>Category:</strong> ${analysis.category}</p>
                                 <p><strong>Priority:</strong> <span class="priority-${analysis.priority}">${analysis.priority.toUpperCase()}</span></p>
@@ -663,7 +663,7 @@
                             const timestamp = new Date(prompt.timestamp.replace(/(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/, '$1-$2-$3T$4:$5:$6')).toLocaleString();
                             promptsHtml += `
                                 <div style="background: #f8f9fa; border-left: 4px solid #007bff; padding: 10px; margin-bottom: 10px; border-radius: 3px;">
-                                    <h6 style="margin: 0 0 5px 0; color: #007bff;">Ticket: ${prompt.ticket_id}</h6>
+                                    <h6 style="margin: 0 0 5px 0; color: #007bff;">Ticket: ${prompt.ticket_number}</h6>
                                     <p style="margin: 3px 0; font-size: 0.9em;"><strong>File:</strong> ${prompt.filename}</p>
                                     <p style="margin: 3px 0; font-size: 0.9em;"><strong>Created:</strong> ${timestamp}</p>
                                     <p style="margin: 3px 0; font-size: 0.9em;"><strong>Type:</strong> ${prompt.analysis_type}</p>

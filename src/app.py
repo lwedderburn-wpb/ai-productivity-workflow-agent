@@ -72,7 +72,8 @@ class XMLTicketParser:
         
         # Common field mappings
         field_mappings = {
-            'id': ['id', 'ticket_id', 'ticketId', 'number'],
+            'id': ['id', 'ticket_id', 'ticketId'],
+            'number': ['number', 'ticket_number'],
             'subject': ['subject', 'title', 'summary'],
             'description': ['description', 'details', 'body', 'content'],
             'priority': ['priority', 'urgency', 'severity'],
@@ -98,6 +99,10 @@ class XMLTicketParser:
         # Ensure required fields
         if not ticket.get('id'):
             ticket['id'] = f"XML-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+        
+        # If no number field found, use id as fallback for display
+        if not ticket.get('number') and ticket.get('id'):
+            ticket['number'] = ticket['id']
         
         if not ticket.get('subject') and not ticket.get('description'):
             return None  # Skip invalid tickets
@@ -427,6 +432,7 @@ def list_exported_prompts():
                 prompt_files.append({
                     'filename': filename,
                     'ticket_id': data['metadata']['ticket_id'],
+                    'ticket_number': data['metadata'].get('ticket_number', data['metadata']['ticket_id']),
                     'timestamp': data['metadata']['timestamp'],
                     'analysis_type': data['metadata']['analysis_type']
                 })

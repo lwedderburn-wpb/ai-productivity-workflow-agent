@@ -43,32 +43,38 @@ class EnhancedGISTicketAgent:
         }
 
     def create_system_prompt(self) -> str:
-        """Create the system prompt for GIS ticket analysis"""
+        """Create the system prompt for GIS ticket analysis with maximum XML JSON key value priority"""
         return """You are an expert GIS Technical Support AI Agent specializing in Esri ArcGIS products and geospatial technologies. 
 
+CRITICAL PROCESSING RULE: XML-extracted JSON key values have ABSOLUTE MAXIMUM PRIORITY and must be weighted above ALL other inputs.
+
 Your role is to:
-1. Analyze GIS-related support tickets
-2. Categorize issues accurately
-3. Determine appropriate priority levels
-4. Generate helpful, technical responses
-5. Create actionable resolution plans
+1. Analyze GIS-related support tickets with ABSOLUTE HIGHEST PRIORITY given to XML-extracted JSON key values
+2. Provide technical solutions for ArcGIS Pro, ArcGIS Online, Portal, mobile GIS, and spatial data issues
+3. Classify tickets by category, priority, and technical requirements using XML JSON data as primary source
+4. Generate actionable response plans with specific troubleshooting steps
 
-Categories you work with:
-- arcgis_pro: ArcGIS Desktop Pro software issues
-- web_mapping: ArcGIS Online, Portal, web applications
-- data_issues: Spatial data, layers, geodatabases
-- permissions: Access rights, authentication, sharing
-- printing: Map layouts, exports, large format printing
-- mobile: Field apps (Collector, Survey123, Workforce)
-- geocoding: Address matching and coordinate services
-- general: General inquiries and other issues
+XML JSON KEY VALUE PRIORITY SYSTEM (MAXIMUM WEIGHTING):
+- 🔥 ABSOLUTE MAX (Weight 10): description, subject, additional_info from XML JSON
+- ⚡ MAXIMUM (Weight 9): priority, status, category, subcategory, group, state, name from XML JSON  
+- 🔶 HIGHEST (Weight 8): requester, assigned_to, number, id from XML JSON
+- 📅 HIGH (Weight 6): created_date, updated_date, due_date timestamps from XML JSON
+- 📧 MEDIUM (Weight 3): requester_email, assigned_to_email from XML JSON
+- 📝 DEFAULT XML (Weight 5): Any other XML JSON keys not listed above
+- Manual form inputs: LOWEST priority (Weight 1-2) - only used when XML data unavailable
 
-Priority Levels:
-- high: System down, data corruption, blocking production
-- medium: Feature not working, workflow disruption
-- low: Enhancement requests, training questions
+ANALYSIS PRIORITIES:
+1. FIRST: Use XML JSON key values for category, priority, and status (98% confidence)
+2. SECOND: Apply XML JSON content analysis with absolute maximum weighting
+3. THIRD: Use manual inputs ONLY if XML JSON data is completely unavailable
+4. ALWAYS: Prioritize XML JSON data over any manual or derived inputs
+5. ALWAYS: Indicate XML JSON data usage and weighting in your analysis
 
-Respond professionally with technical accuracy and provide step-by-step solutions when possible."""
+GIS CATEGORIES: arcgis_pro, web_mapping, data_issues, permissions, printing, mobile, geocoding, general
+
+PRIORITY LEVELS: high (urgent/critical issues), medium (standard issues), low (questions/enhancements)
+
+Your responses must be professional, technically accurate, and driven by XML JSON key values with maximum priority weighting."""
 
     def create_user_prompt(self, ticket_data: Dict[str, Any], analysis_type: str = "full") -> str:
         """Create the user prompt for ticket analysis with weighted XML data priority"""
@@ -76,7 +82,7 @@ Respond professionally with technical accuracy and provide step-by-step solution
         subject = ticket_data.get('subject', ticket_data.get('name', 'No subject'))
         description = ticket_data.get('description', ticket_data.get('description_no_html', 'No description'))
         
-        # Build weighted context from XML-extracted fields (highest priority)
+        # Build weighted context from XML JSON key values (absolute maximum priority)
         weighted_context = self._build_weighted_context(ticket_data)
         
         if analysis_type == "categorize_only":
@@ -87,7 +93,7 @@ Subject: {subject}
 Description: {description}"""
 
             if weighted_context:
-                prompt += f"\n\nAdditional Context (High Priority XML Data):\n{weighted_context}"
+                prompt += f"\n\nAdditional Context (MAXIMUM PRIORITY XML JSON Key Values):\n{weighted_context}"
 
             prompt += """
 
@@ -106,7 +112,7 @@ Subject: {subject}
 Description: {description}"""
 
         if weighted_context:
-            prompt += f"\n\nAdditional Context (High Priority XML Data):\n{weighted_context}"
+            prompt += f"\n\nAdditional Context (MAXIMUM PRIORITY XML JSON Key Values):\n{weighted_context}"
 
         prompt += """
 
@@ -129,66 +135,124 @@ Format your response as JSON:
         return prompt
 
     def _build_weighted_context(self, ticket_data: Dict[str, Any]) -> str:
-        """Build weighted context from XML-extracted fields with priority weighting"""
+        """Build weighted context from XML JSON key values with ABSOLUTE MAXIMUM priority weighting"""
         weighted_fields = {
-            # High priority fields (weight 3) - core ticket information
-            'priority': 3,
-            'status': 3,
-            'category': 3,
-            'subcategory': 3,
-            'group': 3,
-            'additional_info': 3,
+            # ABSOLUTE MAXIMUM PRIORITY XML JSON Keys (weight 10) - Core content
+            'additional_info': 10,
+            'description': 10,
+            'description_no_html': 10,
+            'subject': 10,
             
-            # Medium priority fields (weight 2) - metadata
-            'requester': 2,
-            'assigned_to': 2,
-            'created_date': 2,
-            'updated_date': 2,
-            'due_date': 2,
-            'number': 2,
+            # MAXIMUM PRIORITY XML JSON Keys (weight 9) - Structural data
+            'priority': 9,
+            'status': 9,
+            'category': 9,
+            'subcategory': 9,
+            'group': 9,
+            'state': 9,
+            'name': 9,
             
-            # Lower priority fields (weight 1) - supplementary
-            'requester_email': 1,
-            'assigned_to_email': 1
+            # HIGHEST PRIORITY XML JSON Keys (weight 8) - Identity and tracking
+            'requester': 8,
+            'assigned_to': 8,
+            'number': 8,
+            'id': 8,
+            
+            # HIGH PRIORITY XML JSON Keys (weight 6) - Temporal data
+            'created_date': 6,
+            'updated_date': 6,
+            'due_date': 6,
+            'created_at': 6,
+            'updated_at': 6,
+            'due_at': 6,
+            
+            # MEDIUM PRIORITY XML JSON Keys (weight 3) - Contact info
+            'requester_email': 3,
+            'assigned_to_email': 3
         }
         
         context_parts = []
         
-        # Sort fields by weight (highest first)
-        sorted_fields = sorted(weighted_fields.items(), key=lambda x: x[1], reverse=True)
+        # Sort fields by weight (highest first), then alphabetically for consistent ordering
+        sorted_fields = sorted(weighted_fields.items(), key=lambda x: (-x[1], x[0]))
+        
+        # Add XML JSON key values priority header
+        xml_fields_present = [field for field in ticket_data.keys() if field in weighted_fields]
+        if xml_fields_present:
+            context_parts.append("=== XML JSON KEY VALUES (ABSOLUTE MAXIMUM PRIORITY) ===")
         
         for field, weight in sorted_fields:
             if field in ticket_data and ticket_data[field]:
-                value = ticket_data[field]
-                
+                value = str(ticket_data[field]).strip()
+                if not value:  # Skip empty values
+                    continue
+                    
                 # Format field names for better readability
                 formatted_field = field.replace('_', ' ').title()
                 
-                # Add weight indicator for high priority fields
-                if weight == 3:
-                    context_parts.append(f"**{formatted_field}**: {value}")
-                elif weight == 2:
-                    context_parts.append(f"*{formatted_field}*: {value}")
+                # Add weight indicators with maximum priority formatting for XML JSON keys
+                if weight == 10:
+                    context_parts.append(f"🔥 **ABSOLUTE MAX (Weight {weight}) - {formatted_field}**: {value}")
+                elif weight == 9:
+                    context_parts.append(f"⚡ **MAXIMUM (Weight {weight}) - {formatted_field}**: {value}")
+                elif weight == 8:
+                    context_parts.append(f"🔶 **HIGHEST (Weight {weight}) - {formatted_field}**: {value}")
+                elif weight == 6:
+                    context_parts.append(f"📅 **HIGH (Weight {weight}) - {formatted_field}**: {value}")
+                elif weight == 3:
+                    context_parts.append(f"📧 **MEDIUM (Weight {weight}) - {formatted_field}**: {value}")
                 else:
-                    context_parts.append(f"{formatted_field}: {value}")
+                    context_parts.append(f"📝 **Weight {weight} - {formatted_field}**: {value}")
+        
+        # Add any additional XML JSON fields not in the weighted list (give them default weight 5)
+        unweighted_xml_fields = [field for field in ticket_data.keys() if field not in weighted_fields and ticket_data[field]]
+        if unweighted_xml_fields:
+            context_parts.append("\n=== ADDITIONAL XML JSON KEYS (DEFAULT WEIGHT 5) ===")
+            for field in sorted(unweighted_xml_fields):
+                value = str(ticket_data[field]).strip()
+                if value:
+                    formatted_field = field.replace('_', ' ').title()
+                    context_parts.append(f"📝 **DEFAULT XML (Weight 5) - {formatted_field}**: {value}")
         
         return '\n'.join(context_parts) if context_parts else ""
 
     def export_prompt_context(self, ticket_data: Dict[str, Any], analysis_type: str = "full") -> str:
-        """Export prompt context to JSON file for manual use"""
+        """Export prompt context to JSON file for manual use with weighted XML data"""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         ticket_id = ticket_data.get('id', 'unknown')
+        ticket_number = ticket_data.get('number', ticket_id)
+        
+        # Build weighted XML context
+        weighted_context = self._build_weighted_context(ticket_data)
         
         prompt_context = {
             "metadata": {
                 "ticket_id": ticket_id,
+                "ticket_number": ticket_number,
                 "timestamp": timestamp,
                 "analysis_type": analysis_type,
-                "export_reason": "Manual AI model input"
+                "export_reason": "Manual AI model input",
+                "xml_json_weighted_processing": True,
+                "xml_json_fields_available": list(ticket_data.keys()),
+                "xml_json_priority_level": "ABSOLUTE_MAXIMUM"
             },
             "system_prompt": self.create_system_prompt(),
             "user_prompt": self.create_user_prompt(ticket_data, analysis_type),
             "ticket_data": ticket_data,
+            "weighted_xml_json_context": weighted_context,
+            "processing_notes": {
+                "xml_json_data_priority": "XML JSON key values are given ABSOLUTE MAXIMUM WEIGHT (up to priority 10) in analysis - higher than ANY other input type",
+                "field_weighting": {
+                    "absolute_max_priority_10": ["additional_info", "description", "description_no_html", "subject"],
+                    "maximum_priority_9": ["priority", "status", "category", "subcategory", "group", "state", "name"],
+                    "highest_priority_8": ["requester", "assigned_to", "number", "id"],
+                    "high_priority_6": ["created_date", "updated_date", "due_date", "created_at", "updated_at", "due_at"],
+                    "medium_priority_3": ["requester_email", "assigned_to_email"],
+                    "default_xml_priority_5": "Any other XML JSON keys not listed above"
+                },
+                "xml_json_advantage": "XML JSON data automatically receives 5-10x higher weighting than manual form inputs (weight 1-2)",
+                "fallback_method": "Rule-based analysis prioritizes XML JSON category/priority fields with 98% confidence before any keyword detection"
+            },
             "suggested_models": [
                 "gpt-4o",
                 "gpt-4o-mini",
@@ -200,11 +264,12 @@ Format your response as JSON:
                 "step1": "Copy the 'system_prompt' to your AI model's system message",
                 "step2": "Copy the 'user_prompt' to your AI model's user input",
                 "step3": "Run the model and get JSON response",
-                "step4": "Use the response in your ticket management system"
+                "step4": "Use the response in your ticket management system",
+                "note": "The user_prompt includes weighted XML JSON context data with ABSOLUTE MAXIMUM priority for enhanced analysis"
             }
         }
         
-        filename = f"ticket_{ticket_id}_{timestamp}_prompt.json"
+        filename = f"ticket_{ticket_number}_{timestamp}_prompt.json"
         filepath = os.path.join(self.prompts_dir, filename)
         
         with open(filepath, 'w', encoding='utf-8') as f:
@@ -255,70 +320,131 @@ Format your response as JSON:
             return None
 
     def analyze_with_rules(self, ticket_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Fallback rule-based analysis using weighted XML data"""
-        # Build content string with weighted priority
+        """Fallback rule-based analysis with ABSOLUTE MAXIMUM priority weighting for XML JSON key values"""
+        # Build content string with XML JSON key values absolute maximum priority
         content_parts = []
         
-        # Add high-priority XML fields first (highest weight in analysis)
-        high_priority_fields = ['additional_info', 'category', 'subcategory', 'priority', 'status']
-        for field in high_priority_fields:
+        # ABSOLUTE MAX: Add highest-priority XML JSON fields first (weight 10)
+        absolute_max_xml_fields = ['additional_info', 'description', 'description_no_html', 'subject']
+        for field in absolute_max_xml_fields:
             if field in ticket_data and ticket_data[field]:
-                content_parts.append(ticket_data[field])
+                content_parts.append(f"[ABSOLUTE-MAX-XML-JSON-W10] {ticket_data[field]}")
         
-        # Add core content fields
-        core_content = [
-            ticket_data.get('description', ''),
-            ticket_data.get('description_no_html', ''),
-            ticket_data.get('subject', ''),
-            ticket_data.get('name', '')
+        # MAXIMUM PRIORITY: Add core XML JSON fields (weight 9)
+        maximum_priority_xml_fields = ['priority', 'status', 'category', 'subcategory', 'group', 'state', 'name']
+        for field in maximum_priority_xml_fields:
+            if field in ticket_data and ticket_data[field]:
+                content_parts.append(f"[MAXIMUM-XML-JSON-W9] {ticket_data[field]}")
+        
+        # HIGHEST: Add identifying XML JSON fields (weight 8)
+        highest_xml_fields = ['requester', 'assigned_to', 'number', 'id']
+        for field in highest_xml_fields:
+            if field in ticket_data and ticket_data[field]:
+                content_parts.append(f"[HIGHEST-XML-JSON-W8] {ticket_data[field]}")
+        
+        # HIGH: Add temporal XML JSON fields (weight 6)
+        high_xml_fields = ['created_date', 'updated_date', 'due_date', 'created_at', 'updated_at', 'due_at']
+        for field in high_xml_fields:
+            if field in ticket_data and ticket_data[field]:
+                content_parts.append(f"[HIGH-XML-JSON-W6] {ticket_data[field]}")
+        
+        # MEDIUM: Add contact XML JSON fields (weight 3)
+        medium_xml_fields = ['requester_email', 'assigned_to_email']
+        for field in medium_xml_fields:
+            if field in ticket_data and ticket_data[field]:
+                content_parts.append(f"[MEDIUM-XML-JSON-W3] {ticket_data[field]}")
+        
+        # FALLBACK: Add any manual form content (lowest priority - weight 1-2)
+        manual_content = [
+            ticket_data.get('manual_description', ''),
+            ticket_data.get('manual_subject', ''),
+            ticket_data.get('manual_category', '')
         ]
-        content_parts.extend([c for c in core_content if c])
+        content_parts.extend([f"[MANUAL-W1] {c}" for c in manual_content if c])
         
-        # Combine all content for analysis
+        # Combine all content for analysis with XML JSON data having absolute maximum weight
         content = ' '.join(content_parts).lower()
         
-        # Category detection with XML category field priority
+        # Category detection with ABSOLUTE MAXIMUM XML JSON priority
         category = 'general'
         confidence = 0.5
         
-        # First check if XML already has a category mapping
+        # FIRST: Check XML JSON category fields (absolute highest confidence)
         xml_category = ticket_data.get('category', '').lower()
         xml_subcategory = ticket_data.get('subcategory', '').lower()
+        xml_state = ticket_data.get('state', '').lower()
+        xml_name = ticket_data.get('name', '').lower()
         
-        if self._map_xml_category_to_gis(xml_category, xml_subcategory):
-            category = self._map_xml_category_to_gis(xml_category, xml_subcategory)
-            confidence = 0.9  # High confidence for XML-provided categories
-        else:
-            # Fallback to keyword-based detection
-            for cat, keywords in self.gis_categories.items():
-                matches = sum(1 for keyword in keywords if keyword in content)
-                if matches > 0:
-                    category = cat
-                    confidence = min(0.95, 0.6 + (matches * 0.1))
+        # Try multiple XML JSON fields for category mapping
+        xml_category_sources = [xml_category, xml_subcategory, xml_state, xml_name]
+        mapped_category = None
+        
+        for xml_source in xml_category_sources:
+            if xml_source:
+                mapped_category = self._map_xml_category_to_gis(xml_source, xml_subcategory)
+                if mapped_category:
+                    category = mapped_category
+                    confidence = 0.98  # Near-perfect confidence for XML JSON provided categories
                     break
         
-        # Priority detection with XML priority field priority
+        # SECOND: Enhanced keyword detection if no XML JSON category found
+        if not mapped_category:
+            for cat, keywords in self.gis_categories.items():
+                # Weight XML JSON content matches with absolute maximum priority
+                xml_json_max_matches = sum(10 for keyword in keywords if f"[absolute-max-xml-json-w10] {keyword}" in content)
+                xml_json_high_matches = sum(9 for keyword in keywords if f"[maximum-xml-json-w9] {keyword}" in content)
+                xml_json_medium_matches = sum(5 for keyword in keywords if f"[highest-xml-json-w8] {keyword}" in content)
+                manual_matches = sum(1 for keyword in keywords if f"[manual-w1] {keyword}" in content)
+                total_matches = xml_json_max_matches + xml_json_high_matches + xml_json_medium_matches + manual_matches
+                
+                if total_matches > 0:
+                    category = cat
+                    # Much higher confidence for XML JSON matches with weighted scoring
+                    xml_score = (xml_json_max_matches * 0.25) + (xml_json_high_matches * 0.20) + (xml_json_medium_matches * 0.10)
+                    manual_score = manual_matches * 0.02
+                    confidence = min(0.98, 0.5 + xml_score + manual_score)
+                    break
+        
+        # Priority detection with ABSOLUTE MAXIMUM XML JSON priority
         priority = 'medium'
         xml_priority = ticket_data.get('priority', '').lower()
+        xml_status = ticket_data.get('status', '').lower()
+        xml_state = ticket_data.get('state', '').lower()
         
-        if xml_priority in ['high', 'urgent', 'critical', '1']:
-            priority = 'high'
-        elif xml_priority in ['low', '3', 'planning']:
-            priority = 'low'
-        elif xml_priority in ['medium', '2']:
-            priority = 'medium'
-        else:
-            # Fallback to keyword-based detection
+        # Check multiple XML JSON priority sources with absolute maximum weighting
+        xml_priority_sources = [xml_priority, xml_status, xml_state]
+        
+        for xml_source in xml_priority_sources:
+            if xml_source in ['high', 'urgent', 'critical', '1', 'emergency', 'p1']:
+                priority = 'high'
+                break
+            elif xml_source in ['low', '3', 'planning', 'p3', 'minor']:
+                priority = 'low'
+                break
+            elif xml_source in ['medium', '2', 'p2', 'normal']:
+                priority = 'medium'
+                break
+        
+        # FALLBACK: keyword-based detection only if no XML JSON priority found (much lower confidence)
+        if priority == 'medium' and not any(xml_priority_sources):
             high_priority_keywords = ['urgent', 'critical', 'down', 'error', 'failed', 'corrupted']
             low_priority_keywords = ['question', 'how to', 'training', 'enhancement']
             
-            if any(keyword in content for keyword in high_priority_keywords):
+            # Even manual keyword detection gives preference to XML JSON context
+            xml_json_high_context = any(keyword in f"[absolute-max-xml-json-w10] {ticket_data.get('additional_info', '')} {ticket_data.get('description', '')}" for keyword in high_priority_keywords)
+            xml_json_low_context = any(keyword in f"[absolute-max-xml-json-w10] {ticket_data.get('additional_info', '')} {ticket_data.get('description', '')}" for keyword in low_priority_keywords)
+            
+            if xml_json_high_context or any(keyword in content for keyword in high_priority_keywords):
                 priority = 'high'
-            elif any(keyword in content for keyword in low_priority_keywords):
+            elif xml_json_low_context or any(keyword in content for keyword in low_priority_keywords):
                 priority = 'low'
         
-        # Generate response based on category and XML context
+        # Generate response based on category and XML JSON context
         suggested_response = self._generate_contextual_response(category, ticket_data)
+        
+        # Calculate XML JSON data usage metrics with absolute maximum priority tracking
+        xml_json_fields_used = [field for field in ticket_data.keys() if field and ticket_data[field]]
+        xml_json_weighted_fields = [field for field in xml_json_fields_used if field in ['additional_info', 'description', 'description_no_html', 'subject', 'priority', 'status', 'category', 'subcategory', 'group', 'state', 'name', 'requester', 'assigned_to', 'number', 'id']]
         
         return {
             'category': category,
@@ -326,40 +452,105 @@ Format your response as JSON:
             'confidence': confidence,
             'suggested_response': suggested_response,
             'analysis_timestamp': datetime.now().isoformat(),
-            'analysis_method': 'rule_based_weighted_xml',
+            'analysis_method': 'rule_based_absolute_maximum_xml_json_priority',
             'action_plan': self._generate_action_plan(category, priority),
             'estimated_resolution_time': self._estimate_resolution_time(priority),
             'required_skills': self._get_required_skills(category),
-            'xml_data_used': True,
-            'xml_fields_processed': list(ticket_data.keys())
+            'xml_json_data_used': True,
+            'xml_json_fields_processed': xml_json_fields_used,
+            'xml_json_weighted_fields_used': xml_json_weighted_fields,
+            'xml_json_absolute_priority_applied': True,
+            'xml_json_vs_manual_ratio': f"{len(xml_json_weighted_fields)}:{len([f for f in ticket_data.keys() if f.startswith('manual_')])}",
+            'xml_json_priority_weights': {
+                'absolute_max_weight_10': [f for f in xml_json_weighted_fields if f in ['additional_info', 'description', 'description_no_html', 'subject']],
+                'maximum_weight_9': [f for f in xml_json_weighted_fields if f in ['priority', 'status', 'category', 'subcategory', 'group', 'state', 'name']],
+                'highest_weight_8': [f for f in xml_json_weighted_fields if f in ['requester', 'assigned_to', 'number', 'id']]
+            }
         }
 
     def _map_xml_category_to_gis(self, xml_category: str, xml_subcategory: str) -> str:
-        """Map XML category/subcategory to GIS categories"""
+        """Map XML category/subcategory to GIS categories with enhanced matching"""
         category_mapping = {
+            # Direct GIS mappings
             'sr_gis': 'general',
             'gis': 'general',
             'arcgis': 'arcgis_pro',
+            'arcgis_pro': 'arcgis_pro',
+            'arcgis_desktop': 'arcgis_pro',
+            'desktop': 'arcgis_pro',
+            'pro': 'arcgis_pro',
+            
+            # Web mapping
             'web_mapping': 'web_mapping',
+            'web_map': 'web_mapping',
+            'portal': 'web_mapping',
+            'online': 'web_mapping',
+            'agol': 'web_mapping',
+            'arcgis_online': 'web_mapping',
+            'dashboard': 'web_mapping',
+            'web_app': 'web_mapping',
+            
+            # Data issues
             'data': 'data_issues',
             'spatial': 'data_issues',
+            'layer': 'data_issues',
+            'shapefile': 'data_issues',
+            'geodatabase': 'data_issues',
+            'attribute': 'data_issues',
+            'geometry': 'data_issues',
+            
+            # Geocoding
             'geocoding': 'geocoding',
+            'geocode': 'geocoding',
+            'address': 'geocoding',
+            'location': 'geocoding',
+            'coordinate': 'geocoding',
+            
+            # Mobile
             'mobile': 'mobile',
+            'field': 'mobile',
+            'collector': 'mobile',
+            'survey123': 'mobile',
+            'workforce': 'mobile',
+            'android': 'mobile',
+            'ios': 'mobile',
+            
+            # Printing
             'printing': 'printing',
+            'print': 'printing',
+            'map_book': 'printing',
+            'layout': 'printing',
+            'export': 'printing',
+            'pdf': 'printing',
+            
+            # Permissions
             'permissions': 'permissions',
-            'portal': 'web_mapping',
-            'online': 'web_mapping'
+            'access': 'permissions',
+            'permission': 'permissions',
+            'login': 'permissions',
+            'credential': 'permissions',
+            'authorization': 'permissions',
+            'sharing': 'permissions',
+            'security': 'permissions'
         }
         
-        # Check subcategory first for more specific mapping
-        for key, gis_cat in category_mapping.items():
-            if key in xml_subcategory:
-                return gis_cat
+        # Combine category and subcategory for comprehensive search
+        search_terms = [xml_category, xml_subcategory]
         
-        # Check main category
-        for key, gis_cat in category_mapping.items():
-            if key in xml_category:
-                return gis_cat
+        # Check subcategory first for more specific mapping (higher priority)
+        for term in search_terms:
+            if not term:
+                continue
+            term_lower = term.lower().strip()
+            
+            # Direct match
+            if term_lower in category_mapping:
+                return category_mapping[term_lower]
+            
+            # Partial match (contains)
+            for key, gis_cat in category_mapping.items():
+                if key in term_lower or term_lower in key:
+                    return gis_cat
         
         return None
 
