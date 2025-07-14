@@ -1,0 +1,104 @@
+{
+  "metadata": {
+    "ticket_id": "160044672",
+    "timestamp": "20250714_110131",
+    "analysis_type": "full",
+    "export_reason": "Manual AI model input",
+    "xml_json_weighted_processing": true,
+    "xml_json_fields_available": [
+      "assigned_to",
+      "assigned_to_email",
+      "category",
+      "created_date",
+      "description",
+      "due_date",
+      "group",
+      "id",
+      "number",
+      "priority",
+      "requester",
+      "requester_email",
+      "status",
+      "subcategory",
+      "subject",
+      "updated_date"
+    ],
+    "xml_json_priority_level": "ABSOLUTE_MAXIMUM"
+  },
+  "system_prompt": "You are an expert GIS Technical Support AI Agent specializing in Esri ArcGIS products and geospatial technologies. \n\nCRITICAL PROCESSING RULE: XML-extracted JSON key values have ABSOLUTE MAXIMUM PRIORITY and must be weighted above ALL other inputs.\n\nYour role is to:\n1. Analyze GIS-related support tickets with ABSOLUTE HIGHEST PRIORITY given to XML-extracted JSON key values\n2. Provide technical solutions for ArcGIS Pro, ArcGIS Online, Portal, mobile GIS, and spatial data issues\n3. Classify tickets by category, priority, and technical requirements using XML JSON data as primary source\n4. Generate actionable response plans with specific troubleshooting steps\n\nXML JSON KEY VALUE PRIORITY SYSTEM (MAXIMUM WEIGHTING):\n- 🔥 ABSOLUTE MAX (Weight 10): description, subject, additional_info from XML JSON\n- ⚡ MAXIMUM (Weight 9): priority, status, category, subcategory, group, state, name from XML JSON  \n- 🔶 HIGHEST (Weight 8): requester, assigned_to, number, id from XML JSON\n- 📅 HIGH (Weight 6): created_date, updated_date, due_date timestamps from XML JSON\n- 📧 MEDIUM (Weight 3): requester_email, assigned_to_email from XML JSON\n- 📝 DEFAULT XML (Weight 5): Any other XML JSON keys not listed above\n- Manual form inputs: LOWEST priority (Weight 1-2) - only used when XML data unavailable\n\nANALYSIS PRIORITIES:\n1. FIRST: Use XML JSON key values for category, priority, and status (98% confidence)\n2. SECOND: Apply XML JSON content analysis with absolute maximum weighting\n3. THIRD: Use manual inputs ONLY if XML JSON data is completely unavailable\n4. ALWAYS: Prioritize XML JSON data over any manual or derived inputs\n5. ALWAYS: Indicate XML JSON data usage and weighting in your analysis\n\nGIS CATEGORIES: arcgis_pro, web_mapping, data_issues, permissions, printing, mobile, geocoding, general\n\nPRIORITY LEVELS: high (urgent/critical issues), medium (standard issues), low (questions/enhancements)\n\nYour responses must be professional, technically accurate, and driven by XML JSON key values with maximum priority weighting.",
+  "user_prompt": "Analyze this GIS support ticket and provide a comprehensive response:\n\nTicket ID: 160044672\nSubject: GIS Support - Update to the Zoning and Land Development Regulations (Encode\nDescription: Please update Sections 94-106, 94-124 and 94-611 of the Zoning and Land Development Regulations (Encode) to reflect the changes approved through Ordinances 5132-25 and 5134-25.\n\nAdditional Context (MAXIMUM PRIORITY XML JSON Key Values):\n=== XML JSON KEY VALUES (ABSOLUTE MAXIMUM PRIORITY) ===\n🔥 **ABSOLUTE MAX (Weight 10) - Description**: Please update Sections 94-106, 94-124 and 94-611 of the Zoning and Land Development Regulations (Encode) to reflect the changes approved through Ordinances 5132-25 and 5134-25.\n🔥 **ABSOLUTE MAX (Weight 10) - Subject**: GIS Support - Update to the Zoning and Land Development Regulations (Encode\n⚡ **MAXIMUM (Weight 9) - Category**: SR_GIS\n⚡ **MAXIMUM (Weight 9) - Group**: GIS\n⚡ **MAXIMUM (Weight 9) - Priority**: Medium\n⚡ **MAXIMUM (Weight 9) - Status**: In progress\n⚡ **MAXIMUM (Weight 9) - Subcategory**: 'SR_' Access / Change Request\n🔶 **HIGHEST (Weight 8) - Assigned To**: Leighton Wedderburn\n🔶 **HIGHEST (Weight 8) - Id**: 160044672\n🔶 **HIGHEST (Weight 8) - Number**: 31796\n🔶 **HIGHEST (Weight 8) - Requester**: Alex Hansen\n📅 **HIGH (Weight 6) - Created Date**: 2025-07-10T14:50:07-04:00\n📅 **HIGH (Weight 6) - Due Date**: 2025-07-16T00:00:00-04:00\n📅 **HIGH (Weight 6) - Updated Date**: 2025-07-11T10:07:22-04:00\n📧 **MEDIUM (Weight 3) - Assigned To Email**: lwedderburn@wpb.org\n📧 **MEDIUM (Weight 3) - Requester Email**: AHansen@wpb.org\n\nPlease provide:\n1. Category classification\n2. Priority assessment\n3. Detailed technical response with solution steps\n4. Action plan for resolution\n\nFormat your response as JSON:\n{\n    \"category\": \"category_name\",\n    \"priority\": \"high|medium|low\",\n    \"confidence\": 0.95,\n    \"suggested_response\": \"Detailed technical response here...\",\n    \"action_plan\": [\"Step 1\", \"Step 2\", \"Step 3\"],\n    \"estimated_resolution_time\": \"X hours/days\",\n    \"required_skills\": [\"skill1\", \"skill2\"]\n}",
+  "ticket_data": {
+    "assigned_to": "Leighton Wedderburn",
+    "assigned_to_email": "lwedderburn@wpb.org",
+    "category": "SR_GIS",
+    "created_date": "2025-07-10T14:50:07-04:00",
+    "description": "Please update Sections 94-106, 94-124 and 94-611 of the Zoning and Land Development Regulations (Encode) to reflect the changes approved through Ordinances 5132-25 and 5134-25.",
+    "due_date": "2025-07-16T00:00:00-04:00",
+    "group": "GIS",
+    "id": "160044672",
+    "number": "31796",
+    "priority": "Medium",
+    "requester": "Alex Hansen",
+    "requester_email": "AHansen@wpb.org",
+    "status": "In progress",
+    "subcategory": "'SR_' Access / Change Request",
+    "subject": "GIS Support - Update to the Zoning and Land Development Regulations (Encode",
+    "updated_date": "2025-07-11T10:07:22-04:00"
+  },
+  "weighted_xml_json_context": "=== XML JSON KEY VALUES (ABSOLUTE MAXIMUM PRIORITY) ===\n🔥 **ABSOLUTE MAX (Weight 10) - Description**: Please update Sections 94-106, 94-124 and 94-611 of the Zoning and Land Development Regulations (Encode) to reflect the changes approved through Ordinances 5132-25 and 5134-25.\n🔥 **ABSOLUTE MAX (Weight 10) - Subject**: GIS Support - Update to the Zoning and Land Development Regulations (Encode\n⚡ **MAXIMUM (Weight 9) - Category**: SR_GIS\n⚡ **MAXIMUM (Weight 9) - Group**: GIS\n⚡ **MAXIMUM (Weight 9) - Priority**: Medium\n⚡ **MAXIMUM (Weight 9) - Status**: In progress\n⚡ **MAXIMUM (Weight 9) - Subcategory**: 'SR_' Access / Change Request\n🔶 **HIGHEST (Weight 8) - Assigned To**: Leighton Wedderburn\n🔶 **HIGHEST (Weight 8) - Id**: 160044672\n🔶 **HIGHEST (Weight 8) - Number**: 31796\n🔶 **HIGHEST (Weight 8) - Requester**: Alex Hansen\n📅 **HIGH (Weight 6) - Created Date**: 2025-07-10T14:50:07-04:00\n📅 **HIGH (Weight 6) - Due Date**: 2025-07-16T00:00:00-04:00\n📅 **HIGH (Weight 6) - Updated Date**: 2025-07-11T10:07:22-04:00\n📧 **MEDIUM (Weight 3) - Assigned To Email**: lwedderburn@wpb.org\n📧 **MEDIUM (Weight 3) - Requester Email**: AHansen@wpb.org",
+  "processing_notes": {
+    "xml_json_data_priority": "XML JSON key values are given ABSOLUTE MAXIMUM WEIGHT (up to priority 10) in analysis - higher than ANY other input type",
+    "field_weighting": {
+      "absolute_max_priority_10": [
+        "additional_info",
+        "description",
+        "description_no_html",
+        "subject"
+      ],
+      "maximum_priority_9": [
+        "priority",
+        "status",
+        "category",
+        "subcategory",
+        "group",
+        "state",
+        "name"
+      ],
+      "highest_priority_8": [
+        "requester",
+        "assigned_to",
+        "number",
+        "id"
+      ],
+      "high_priority_6": [
+        "created_date",
+        "updated_date",
+        "due_date",
+        "created_at",
+        "updated_at",
+        "due_at"
+      ],
+      "medium_priority_3": [
+        "requester_email",
+        "assigned_to_email"
+      ],
+      "default_xml_priority_5": "Any other XML JSON keys not listed above"
+    },
+    "xml_json_advantage": "XML JSON data automatically receives 5-10x higher weighting than manual form inputs (weight 1-2)",
+    "fallback_method": "Rule-based analysis prioritizes XML JSON category/priority fields with 98% confidence before any keyword detection"
+  },
+  "suggested_models": [
+    "gpt-4o",
+    "gpt-4o-mini",
+    "claude-3.5-sonnet",
+    "gemini-pro",
+    "llama-3.1-70b"
+  ],
+  "usage_instructions": {
+    "step1": "Copy the 'system_prompt' to your AI model's system message",
+    "step2": "Copy the 'user_prompt' to your AI model's user input",
+    "step3": "Run the model and get JSON response",
+    "step4": "Use the response in your ticket management system",
+    "note": "The user_prompt includes weighted XML JSON context data with ABSOLUTE MAXIMUM priority for enhanced analysis"
+  }
+}

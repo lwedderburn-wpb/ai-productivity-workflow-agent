@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,6 +145,29 @@
             background: #5a6268;
         }
 
+        .btn-clear {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-clear:hover {
+            background: #c82333;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 15px;
+        }
+
         .result {
             margin-top: 20px;
             padding: 15px;
@@ -200,6 +222,46 @@
             font-size: 0.9em;
         }
 
+        .process-button {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .process-button:hover {
+            background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .process-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .processing-status {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #856404;
+        }
+
+        .hidden {
+            display: none;
+        }
+        
+
         .loading {
             text-align: center;
             padding: 20px;
@@ -230,6 +292,11 @@
         <div class="header">
             <h1>GIS Ticket Management AI Agent</h1>
             <p>Automate your daily workflow and boost productivity</p>
+            <div style="margin-top: 15px;">
+                <button onclick="clearAllForms()" class="btn-clear" style="background: #6c757d; padding: 10px 20px; font-size: 16px;">
+                    🗑️ Clear All Forms
+                </button>
+            </div>
         </div>
 
         <div class="dashboard">
@@ -272,7 +339,10 @@
                         <label for="ticket-description">Description</label>
                         <textarea id="ticket-description" name="ticket-description" placeholder="Detailed description of the issue..."></textarea>
                     </div>
-                    <button type="submit" class="btn">Analyze Ticket</button>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn">Analyze Ticket</button>
+                        <button type="button" class="btn-clear" onclick="clearSingleTicketForm()">🗑️ Clear</button>
+                    </div>
                 </form>
                 <div id="single-result"></div>
             </div>
@@ -286,7 +356,10 @@
                         <label for="xml-file">XML File</label>
                         <input type="file" id="xml-file" name="xml-file" accept=".xml" required>
                     </div>
-                    <button type="submit" class="btn">Import XML Tickets</button>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn">Import XML Tickets</button>
+                        <button type="button" class="btn-clear" onclick="clearXmlImportForm()">🗑️ Clear</button>
+                    </div>
                 </form>
                 <div id="xml-import-result"></div>
             </div>
@@ -299,7 +372,10 @@
                     <label for="bulk-tickets">Tickets (JSON format)</label>
                     <textarea id="bulk-tickets" name="bulk-tickets" placeholder='[{"id": "TICKET-001", "subject": "GIS Issue", "description": "Description here"}, ...]'></textarea>
                 </div>
-                <button onclick="processBulkTickets()" class="btn">Process Bulk Tickets</button>
+                <div class="form-buttons">
+                    <button onclick="processBulkTickets()" class="btn">Process Bulk Tickets</button>
+                    <button type="button" class="btn-clear" onclick="clearBulkTicketsForm()">🗑️ Clear</button>
+                </div>
                 <div id="bulk-result"></div>
             </div>
 
@@ -323,9 +399,23 @@
                         <label for="response-content">Ticket Content</label>
                         <textarea id="response-content" name="response-content" placeholder="Paste the ticket content here..."></textarea>
                     </div>
-                    <button type="submit" class="btn">Generate Response</button>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn">Generate Response</button>
+                        <button type="button" class="btn-clear" onclick="clearResponseForm()">🗑️ Clear</button>
+                    </div>
                 </form>
                 <div id="response-result"></div>
+            </div>
+
+            <!-- AI Prompt Exports -->
+            <div class="card">
+                <h3>🤖 AI Prompt Exports</h3>
+                <p>View exported prompts for manual AI model usage</p>
+                <div class="form-buttons">
+                    <button onclick="loadExportedPrompts()" class="btn">📄 View Exported Prompts</button>
+                    <button type="button" class="btn-clear" onclick="clearPromptsResults()">🗑️ Clear Results</button>
+                </div>
+                <div id="prompts-result"></div>
             </div>
         </div>
     </div>
@@ -376,21 +466,31 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
+                    // Store imported tickets for processing
+                    window.importedTickets = data.results;
+                    
                     let resultsHtml = `<div class="result">
                         <h4>XML Import Results</h4>
                         <p><strong>Successfully imported ${data.total_imported} tickets</strong></p>
+                        
+                        <button id="process-tickets-btn" class="process-button" onclick="processImportedTickets()">
+                            🚀 Begin AI Processing of ${data.total_imported} Tickets
+                        </button>
+                        
+                        <div id="processing-status" class="hidden"></div>
+                        
                         <div class="imported-tickets">`;
                     
                     data.results.forEach(result => {
                         const analysis = result.analysis;
                         const ticket = result.ticket_data;
                         resultsHtml += `
-                            <div class="ticket-summary">
-                                <h5>Ticket: ${ticket.id}</h5>
+                            <div class="ticket-summary" data-ticket-id="${ticket.id}">
+                                <h5>Ticket: ${ticket.number || ticket.id}</h5>
                                 <p><strong>Subject:</strong> ${ticket.subject || 'N/A'}</p>
                                 <p><strong>Category:</strong> ${analysis.category}</p>
                                 <p><strong>Priority:</strong> <span class="priority-${analysis.priority}">${analysis.priority.toUpperCase()}</span></p>
-                                <p><strong>Confidence:</strong> ${(analysis.confidence * 100).toFixed(1)}%</p>
+                                <p><strong>Status:</strong> <span class="ticket-status">Ready for Processing</span></p>
                             </div>
                         `;
                     });
@@ -539,6 +639,263 @@
                 resultDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
             });
         });
+
+        // Load exported prompts
+        function loadExportedPrompts() {
+            const resultDiv = document.getElementById('prompts-result');
+            resultDiv.innerHTML = '<div class="loading">Loading exported prompts...</div>';
+
+            fetch('/api/prompts')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        if (data.prompts.length === 0) {
+                            resultDiv.innerHTML = '<div class="result"><p>No exported prompts found. Process some tickets to generate prompt exports.</p></div>';
+                            return;
+                        }
+
+                        let promptsHtml = `<div class="result">
+                            <h4>📄 Exported AI Prompts (${data.total_count})</h4>
+                            <p><em>These JSON files contain formatted prompts for manual AI model input</em></p>
+                            <div style="max-height: 300px; overflow-y: auto; margin-top: 10px;">`;
+
+                        data.prompts.forEach(prompt => {
+                            const timestamp = new Date(prompt.timestamp.replace(/(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/, '$1-$2-$3T$4:$5:$6')).toLocaleString();
+                            promptsHtml += `
+                                <div style="background: #f8f9fa; border-left: 4px solid #007bff; padding: 10px; margin-bottom: 10px; border-radius: 3px;">
+                                    <h6 style="margin: 0 0 5px 0; color: #007bff;">Ticket: ${prompt.ticket_number}</h6>
+                                    <p style="margin: 3px 0; font-size: 0.9em;"><strong>File:</strong> ${prompt.filename}</p>
+                                    <p style="margin: 3px 0; font-size: 0.9em;"><strong>Created:</strong> ${timestamp}</p>
+                                    <p style="margin: 3px 0; font-size: 0.9em;"><strong>Type:</strong> ${prompt.analysis_type}</p>
+                                    <button onclick="viewPromptFile('${prompt.filename}')" class="btn" style="font-size: 0.8em; padding: 5px 10px; margin-top: 5px;">
+                                        📋 View Prompt Content
+                                    </button>
+                                </div>
+                            `;
+                        });
+
+                        promptsHtml += '</div></div>';
+                        resultDiv.innerHTML = promptsHtml;
+                    } else {
+                        resultDiv.innerHTML = `<div class="error">Error: ${data.error}</div>`;
+                    }
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                });
+        }
+
+        // View specific prompt file
+        function viewPromptFile(filename) {
+            fetch(`/api/prompts/${filename}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const promptData = data.prompt_data;
+                        
+                        // Create a modal-like display
+                        const modal = document.createElement('div');
+                        modal.className = 'prompt-modal';
+                        modal.style.cssText = `
+                            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                            background: rgba(0,0,0,0.7); z-index: 1000; 
+                            display: flex; align-items: center; justify-content: center;
+                            padding: 20px; box-sizing: border-box;
+                        `;
+                        
+                        modal.innerHTML = `
+                            <div style="background: white; border-radius: 10px; padding: 20px; max-width: 90%; max-height: 90%; overflow-y: auto;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                    <h3>🤖 AI Prompt for Ticket: ${promptData.metadata.ticket_id}</h3>
+                                    <button onclick="this.parentElement.parentElement.parentElement.remove()" style="background: #dc3545; color: white; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer;">✕ Close</button>
+                                </div>
+                                
+                                <div style="margin-bottom: 20px; padding: 10px; background: #e7f3ff; border-radius: 5px;">
+                                    <h4>📋 Usage Instructions:</h4>
+                                    <ol style="margin: 10px 0; padding-left: 20px;">
+                                        <li>Copy the System Prompt to your AI model's system message</li>
+                                        <li>Copy the User Prompt to your AI model's user input</li>
+                                        <li>Run the model and get JSON response</li>
+                                        <li>Use the response in your ticket management system</li>
+                                    </ol>
+                                    <p><strong>Recommended Models:</strong> ${promptData.suggested_models.join(', ')}</p>
+                                </div>
+                                
+                                <div style="margin-bottom: 15px;">
+                                    <h4>🔧 System Prompt:</h4>
+                                    <textarea readonly style="width: 100%; height: 150px; font-family: monospace; font-size: 0.9em; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">${promptData.system_prompt}</textarea>
+                                    <button onclick="navigator.clipboard.writeText(\`${promptData.system_prompt.replace(/`/g, '\\`')}\`); this.textContent='✅ Copied!'; setTimeout(() => this.textContent='📋 Copy System Prompt', 2000)" style="margin-top: 5px; padding: 5px 10px; background: #28a745; color: white; border: none; border-radius: 3px; cursor: pointer;">📋 Copy System Prompt</button>
+                                </div>
+                                
+                                <div style="margin-bottom: 15px;">
+                                    <h4>💬 User Prompt:</h4>
+                                    <textarea readonly style="width: 100%; height: 200px; font-family: monospace; font-size: 0.9em; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">${promptData.user_prompt}</textarea>
+                                    <button onclick="navigator.clipboard.writeText(\`${promptData.user_prompt.replace(/`/g, '\\`')}\`); this.textContent='✅ Copied!'; setTimeout(() => this.textContent='📋 Copy User Prompt', 2000)" style="margin-top: 5px; padding: 5px 10px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer;">📋 Copy User Prompt</button>
+                                </div>
+                                
+                                <div>
+                                    <h4>📄 Complete JSON Export:</h4>
+                                    <textarea readonly style="width: 100%; height: 100px; font-family: monospace; font-size: 0.8em; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">${JSON.stringify(promptData, null, 2)}</textarea>
+                                    <button onclick="navigator.clipboard.writeText(\`${JSON.stringify(promptData, null, 2).replace(/`/g, '\\`')}\`); this.textContent='✅ Copied!'; setTimeout(() => this.textContent='📋 Copy Full JSON', 2000)" style="margin-top: 5px; padding: 5px 10px; background: #6c757d; color: white; border: none; border-radius: 3px; cursor: pointer;">📋 Copy Full JSON</button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        document.body.appendChild(modal);
+                    } else {
+                        alert('Error loading prompt file: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    alert('Error loading prompt file: ' + error.message);
+                });
+        }
+
+        // Process imported tickets function
+        function processImportedTickets() {
+            if (!window.importedTickets || window.importedTickets.length === 0) {
+                alert('No imported tickets to process');
+                return;
+            }
+
+            const processBtn = document.getElementById('process-tickets-btn');
+            const statusDiv = document.getElementById('processing-status');
+            
+            // Disable button and show processing status
+            processBtn.disabled = true;
+            processBtn.textContent = 'Processing...';
+            statusDiv.classList.remove('hidden');
+            statusDiv.innerHTML = '<strong>Processing tickets...</strong> Please wait while the AI agent works on your tickets.';
+
+            // Send tickets for advanced processing
+            fetch('/api/process_tickets', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    tickets: window.importedTickets,
+                    processing_options: {
+                        generate_responses: true,
+                        assign_priority: true,
+                        categorize: true,
+                        create_action_plan: true
+                    }
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    statusDiv.innerHTML = `
+                        <div class="result">
+                            <h4>✅ Processing Complete!</h4>
+                            <p><strong>Successfully processed ${data.total_processed} tickets</strong></p>
+                            <p>Average processing time: ${data.avg_processing_time}ms per ticket</p>
+                            <p>Responses generated: ${data.responses_generated}</p>
+                            <p>Action plans created: ${data.action_plans_created}</p>
+                        </div>
+                    `;
+                    
+                    // Update ticket statuses in the display
+                    data.processed_tickets.forEach(processedTicket => {
+                        const ticketElement = document.querySelector(`[data-ticket-id="${processedTicket.ticket_id}"]`);
+                        if (ticketElement) {
+                            const statusSpan = ticketElement.querySelector('.ticket-status');
+                            if (statusSpan) {
+                                statusSpan.textContent = 'Processed ✓';
+                                statusSpan.style.color = '#28a745';
+                                statusSpan.style.fontWeight = 'bold';
+                            }
+                            
+                            // Add response preview
+                            const responsePreview = document.createElement('div');
+                            responsePreview.innerHTML = `
+                                <p><strong>AI Response Preview:</strong></p>
+                                <div style="background: #e7f3ff; padding: 8px; border-radius: 3px; font-size: 0.8em; margin-top: 5px;">
+                                    ${processedTicket.response.substring(0, 150)}...
+                                    <br><small><em>Click to view full response</em></small>
+                                </div>
+                            `;
+                            ticketElement.appendChild(responsePreview);
+                        }
+                    });
+                    
+                    processBtn.textContent = 'Processing Complete ✓';
+                    processBtn.style.background = '#28a745';
+                    
+                    // Refresh stats
+                    loadStats();
+                } else {
+                    statusDiv.innerHTML = `<div class="error">Processing Error: ${data.error}</div>`;
+                    processBtn.disabled = false;
+                    processBtn.textContent = '🚀 Begin AI Processing';
+                }
+            })
+            .catch(error => {
+                statusDiv.innerHTML = `<div class="error">Processing Error: ${error.message}</div>`;
+                processBtn.disabled = false;
+                processBtn.textContent = '🚀 Begin AI Processing';
+            });
+        }
+
+        // Clear form functions
+        function clearSingleTicketForm() {
+            document.getElementById('ticket-id').value = '';
+            document.getElementById('ticket-subject').value = '';
+            document.getElementById('ticket-description').value = '';
+            document.getElementById('single-result').innerHTML = '';
+            console.log('Single ticket form cleared');
+        }
+
+        function clearXmlImportForm() {
+            document.getElementById('xml-file').value = '';
+            document.getElementById('xml-import-result').innerHTML = '';
+            // Clear any stored imported tickets
+            window.importedTickets = [];
+            console.log('XML import form cleared');
+        }
+
+        function clearBulkTicketsForm() {
+            document.getElementById('bulk-tickets').value = '';
+            document.getElementById('bulk-result').innerHTML = '';
+            console.log('Bulk tickets form cleared');
+        }
+
+        function clearResponseForm() {
+            document.getElementById('response-category').value = 'general';
+            document.getElementById('response-content').value = '';
+            document.getElementById('response-result').innerHTML = '';
+            console.log('Response form cleared');
+        }
+
+        function clearPromptsResults() {
+            // Clear the results div
+            document.getElementById('prompts-result').innerHTML = '';
+            
+            // Close any open prompt modal dialogs
+            const promptModals = document.querySelectorAll('.prompt-modal');
+            promptModals.forEach(modal => modal.remove());
+            
+            // Fallback: also check for any remaining modals with specific styling
+            const fixedModals = document.querySelectorAll('div[style*="position: fixed"]');
+            fixedModals.forEach(modal => {
+                if (modal.innerHTML && (modal.innerHTML.includes('AI Prompt for Ticket') || modal.innerHTML.includes('🤖'))) {
+                    modal.remove();
+                }
+            });
+            
+            console.log('Prompts results and modals cleared');
+        }
+
+        // Clear all forms function (bonus feature)
+        function clearAllForms() {
+            clearSingleTicketForm();
+            clearXmlImportForm();
+            clearBulkTicketsForm();
+            clearResponseForm();
+            clearPromptsResults();
+            console.log('All forms cleared');
+        }
     </script>
 </body>
 </html>
