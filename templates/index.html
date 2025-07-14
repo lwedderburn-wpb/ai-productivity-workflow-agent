@@ -185,33 +185,6 @@
         .priority-medium { color: #ffc107; }
         .priority-low { color: #28a745; }
 
-        .imported-tickets {
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            margin-top: 10px;
-        }
-
-        .ticket-summary {
-            background-color: #f8f9fa;
-            border-left: 4px solid #007bff;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 3px;
-        }
-
-        .ticket-summary h5 {
-            margin: 0 0 5px 0;
-            color: #007bff;
-        }
-
-        .ticket-summary p {
-            margin: 3px 0;
-            font-size: 0.9em;
-        }
-
         .response-text {
             background: #f8f9fa;
             padding: 15px;
@@ -440,6 +413,7 @@
                     console.error('Error loading stats:', error);
                 });
         }
+
 
         // XML import functionality
         document.getElementById('xml-import-form').addEventListener('submit', function(e) {

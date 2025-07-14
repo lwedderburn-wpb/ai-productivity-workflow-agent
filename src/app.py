@@ -3,12 +3,12 @@ import json
 import os
 from datetime import datetime
 import re
-import xml.etree.ElementTree as ET
 from typing import Dict, List, Any
 from ai_agent import EnhancedGISTicketAgent
 
 app = Flask(__name__, template_folder='../templates')
 app.secret_key = 'your-secret-key-here'
+
 
 class XMLTicketParser:
     """Parse ticket information from XML files"""
@@ -272,52 +272,6 @@ def generate_response():
     
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-@app.route('/api/import_xml', methods=['POST'])
-def import_xml():
-    """Import tickets from XML file"""
-    try:
-        if 'xml_file' not in request.files:
-            return jsonify({'error': 'No XML file provided'}), 400
-        
-        xml_file = request.files['xml_file']
-        if xml_file.filename == '':
-            return jsonify({'error': 'No file selected'}), 400
-        
-        if not xml_file.filename.lower().endswith('.xml'):
-            return jsonify({'error': 'File must be an XML file'}), 400
-        
-        # Read XML content
-        xml_content = xml_file.read().decode('utf-8')
-        
-        # Parse XML and extract tickets
-        parser = XMLTicketParser()
-        tickets = parser.parse_xml_file(xml_content)
-        
-        if not tickets:
-            return jsonify({'error': 'No valid tickets found in XML file'}), 400
-        
-        # Analyze each ticket
-        results = []
-        for ticket in tickets:
-            analysis = gis_agent.analyze_ticket(ticket)
-            results.append({
-                'ticket_id': ticket.get('id'),
-                'ticket_data': ticket,
-                'analysis': analysis
-            })
-        
-        return jsonify({
-            'status': 'success',
-            'message': f'Successfully imported {len(tickets)} tickets from XML',
-            'total_imported': len(tickets),
-            'results': results
-        })
-    
-    except ValueError as e:
-        return jsonify({'error': str(e)}), 400
-    except Exception as e:
-        return jsonify({'error': f'Failed to process XML file: {str(e)}'}), 500
 
 @app.route('/api/stats', methods=['GET'])
 def get_stats():
